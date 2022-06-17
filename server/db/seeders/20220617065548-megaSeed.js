@@ -1,5 +1,10 @@
+const games = require('../testData/games');
+const tournaments = require('../testData/tournaments');
 const users = require('../testData/users');
+const tourGames = require('../testData/tourGames');
 const queues = require('../testData/queues');
+const duoreg = require('../testData/duoreg');
+const soloreg = require('../testData/soloreg');
 
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -13,7 +18,12 @@ module.exports = {
      * }], {});
     */
     await queryInterface.bulkInsert('Users', users, {});
+    await queryInterface.bulkInsert('Games', games, {});
+    await queryInterface.bulkInsert('Tournaments', tournaments, {});
+    await queryInterface.bulkInsert('TourGames', tourGames, {});
     await queryInterface.bulkInsert('Queues', queues, {});
+    await queryInterface.bulkInsert('DuoTourRegs', duoreg, {});
+    await queryInterface.bulkInsert('SoloTourRegs', soloreg, {});
   },
 
   async down(queryInterface, Sequelize) {

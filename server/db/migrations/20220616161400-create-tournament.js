@@ -8,12 +8,19 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       name: {
+        allowNull: false,
         type: Sequelize.STRING,
       },
       date: {
+        allowNull: false,
         type: Sequelize.STRING,
       },
       mode: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+      first_round: {
+        allowNull: false,
         type: Sequelize.STRING,
       },
       createdAt: {
