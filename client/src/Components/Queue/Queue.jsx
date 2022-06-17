@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllUsers } from '../../Redux/Actions/getAllUsersAction';
+import { getQueue } from '../../Redux/Actions/getQueueAction';
 
 function Queue() {
   const dispatch = useDispatch();
   const { queue } = useSelector((state) => state);
   useEffect(() => {
     if (!queue.length) {
-      dispatch(getAllUsers());
+      dispatch(getQueue());
     }
   }, []);
 
@@ -15,7 +15,7 @@ function Queue() {
     <div>
       Queue
       {queue.map((el) => (
-        <div key={el.id}>{el.nickName}</div>
+        <div key={el.id}>{el.user_id}</div>
       ))}
     </div>
   );
