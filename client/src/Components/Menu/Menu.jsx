@@ -8,7 +8,7 @@ function Menu() {
       <div className="menu-wrapper">
         <div className="menu-item-wrapper">
           <li>
-            <Link to="/rating"><img className="menu-img" src="/images/rating.jpeg" alt="Rating" /></Link>
+            <Link to="/rankings"><img className="menu-img" src="/images/rating.jpeg" alt="Rating" /></Link>
           </li>
         </div>
         <div className="menu-item-wrapper">
