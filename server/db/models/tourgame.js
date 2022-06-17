@@ -9,19 +9,17 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ User }) {
+    static associate({ User, Tournament }) {
       // define association here
       this.belongsTo(User, { foreignKey: 'user_id' });
+      this.belongsTo(Tournament, { foreignKey: 'tour_id' });
     }
   }
   TourGame.init({
+    tour_id: DataTypes.INTEGER,
     user_id: DataTypes.INTEGER,
-    '1 / 32': DataTypes.BOOLEAN,
-    '1 / 16': DataTypes.BOOLEAN,
-    '1 / 8': DataTypes.BOOLEAN,
-    '1 / 4': DataTypes.BOOLEAN,
-    '1 / 2': DataTypes.BOOLEAN,
-    final: DataTypes.BOOLEAN,
+    started: DataTypes.STRING,
+    got_to: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'TourGame',

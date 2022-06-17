@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     date: DataTypes.STRING,
     mode: DataTypes.STRING,
+    first_round: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Tournament',
