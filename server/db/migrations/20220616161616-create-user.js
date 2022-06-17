@@ -7,17 +7,25 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
+      role: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
       firstName: {
+        allowNull: false,
         type: Sequelize.STRING,
       },
       lastName: {
+        allowNull: false,
         type: Sequelize.STRING,
       },
       nickName: {
+        allowNull: false,
         type: Sequelize.STRING,
         unique: true,
       },
       pass: {
+        allowNull: false,
         type: Sequelize.STRING,
       },
       rank: {
@@ -30,9 +38,11 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       active: {
+        allowNull: false,
         type: Sequelize.BOOLEAN,
       },
       ban: {
+        allowNull: false,
         type: Sequelize.BOOLEAN,
       },
       createdAt: {
