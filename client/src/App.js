@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Auth from './Components/Auth/Auth';
 import Exit from './Components/Exit/Exit';
@@ -15,7 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Auth />} />
         <Route path="/registration" element={<Registration />} />
-        <Route path="/rating" element={<Rating />} />
+        <Route path="/rankings" element={<Rating />} />
         <Route path="/queue" element={<Queue />} />
         <Route path="/tournament" element={<Tournament />} />
       </Routes>
