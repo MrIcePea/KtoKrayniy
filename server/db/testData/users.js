@@ -298,7 +298,7 @@ const users = [{
   won: 150,
   lost: 0,
   active: false,
-  ban: false,
+  ban: true,
   createdAt: new Date(),
   updatedAt: new Date(),
 }];
