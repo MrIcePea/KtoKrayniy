@@ -9,9 +9,10 @@ const cors = require('cors');
 // const FileStore = require('session-file-store')(session);
 // const { checkSession } = require('./MiddleWars/MiddleWar');
 // const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
 
 const app = express();
-const PORT = 3000;
+const { PORT } = process.env;
 
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
@@ -33,7 +34,7 @@ app.use(express.json());
 
 // app.use(checkSession);
 
-app.use('/', indexRouter);
+app.use('/users', usersRouter);
 
 // Если HTTP-запрос дошёл до этой строчки, значит ни один из ранее встречаемых рутов не ответил на запрос. Это значит, что искомого раздела просто нет на сайте. Для таких ситуаций используется код ошибки 404. Создаём небольшое middleware, которое генерирует соответствующую ошибку.
 app.use((req, res, next) => {
