@@ -1,39 +1,46 @@
 /* eslint-disable max-len */
 const express = require('express');
 const createError = require('http-errors');
-const hbs = require('hbs');
+// const hbs = require('hbs');
 const logger = require('morgan');
 const path = require('path');
 const session = require('express-session');
+const FileStore = require('session-file-store')(session);
 const cors = require('cors');
-// const FileStore = require('session-file-store')(session);
-// const { checkSession } = require('./MiddleWars/MiddleWar');
-// const indexRouter = require('./routes/index');
+const { checkSession, checkLogin } = require('./middleWare/middleWare');
+const indexRouter = require('./routers/indexRouter');
+const checkRouter = require('./routers/checkRouter');
 
 const app = express();
 const PORT = 3000;
 
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
-hbs.registerPartials(path.join('views', 'partials'));
+// hbs.registerPartials(path.join('views', 'partials'));
 
-app.use(cors());
+// app.use(cors());
+app.use(cors({ credentials: true, origin: 'http://localhost:3001' }));
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// app.use(session({
-//   name: 'sID',
-//   store: new FileStore({}),
-//   secret: 'user',
-//   resave: true,
-//   saveUninitialized: false,
-// }));
+app.use(session({
+  name: 'sID',
+  store: new FileStore({}),
+  secret: 'user',
+  resave: true,
+  saveUninitialized: false,
+  cookie: {
+    expires: 24 * 60 * 60e3,
+    httpOnly: true,
+  },
+}));
 
-// app.use(checkSession);
+app.use(checkSession);
 
 app.use('/', indexRouter);
+app.use('/check', checkRouter);
 
 // Если HTTP-запрос дошёл до этой строчки, значит ни один из ранее встречаемых рутов не ответил на запрос. Это значит, что искомого раздела просто нет на сайте. Для таких ситуаций используется код ошибки 404. Создаём небольшое middleware, которое генерирует соответствующую ошибку.
 app.use((req, res, next) => {
