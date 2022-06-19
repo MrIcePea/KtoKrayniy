@@ -34,6 +34,8 @@ import { userLogOut } from '../../Redux/Actions/signAction';
 
 export default function TopMenu() {
   const { user } = useSelector((state) => state);
+  console.log('--->', user);
+
   const dispatch = useDispatch();
   const logOutHAndler = () => {
     dispatch(userLogOut());
@@ -53,10 +55,9 @@ export default function TopMenu() {
             className="me-auto"
             navbar
           >
-
-            {/* {!user.name
+            {!user.name
             && (
-            <> */}
+            <>
               <NavItem>
                 <DomLink to="/signin">
                   Войти
@@ -67,8 +68,8 @@ export default function TopMenu() {
                   Зарегаться
                 </DomLink>
               </NavItem>
-            {/* </>
-            )} */}
+            </>
+            )}
             <UncontrolledDropdown
               inNavbar
               nav
@@ -93,9 +94,9 @@ export default function TopMenu() {
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>
-          {/* <NavbarText onClick={logOutHAndler}>
-            {user.name ? `Hi, ${user.name}` : 'Login please'}
-          </NavbarText> */}
+          <NavbarText onClick={logOutHAndler}>
+            { user.name ? `Hi, ${user.name} 🚪` : 'Login please'}
+          </NavbarText>
         </Collapse>
       </Navbar>
     </div>

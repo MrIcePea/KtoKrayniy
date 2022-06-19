@@ -7,7 +7,7 @@ router.route('/')
     // const { userid } = req.session;
 
     // const animals = await Animals.findAll();
-    console.log('------->>>', { req });
+    console.log('------->>>', ip);
     res.send(ip);
   });
 

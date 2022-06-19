@@ -17,15 +17,18 @@ router.route('/signout')
 router.route('/signin')
   .post(async (req, res) => {
     const { nickName, pass } = req.body;
+    console.log('-->>', nickName, pass);
     if (nickName && pass) {
+      console.log('--<<', nickName, pass);
       const user = await User.findOne({ where: { nickName } });
       if (user && await bcrypt.compare(pass, user.pass)) {
         req.session.user = { name: user.nickName, id: user.id, role: user.role };
+        console.log('----<<<<', req.session);
         return res.json({ name: user.nickName, id: user.id, role: user.role });
       }
-      return res.sendStatus(401);
+      return res.sendStatus(402);
     }
-    return res.sendStatus(401);
+    return res.sendStatus(403);
   });
 
 router.route('/signup')

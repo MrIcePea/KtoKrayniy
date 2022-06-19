@@ -1,9 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Routes, Route, Link } from 'react-router-dom';
 import { Container } from 'reactstrap';
+import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import './App.css';
 import SignIn from './Components/SignIn/SignIn';
 import SignUp from './Components/SignUp/SignUp';
 import Main from './Components/Main/Main';
@@ -11,7 +11,6 @@ import TopMenu from './Components/TopMenu/TopMenu';
 import Menu from './Components/Menu/Menu';
 import Queue from './Components/Queue/Queue';
 import Rating from './Components/Rating/Rating';
-import Registration from './Components/Registration/Registration';
 import Tournament from './Components/Tournament/Tournament';
 import { checkUser } from './Redux/Actions/signAction';
 import AuthRouter from './Components/AuthRouter/AuthRouter';
@@ -24,13 +23,13 @@ function App() {
     dispatch(checkUser());
   }, []);
   return (
-    <div>
-      {/* <Container className="App"> */}
+  // <div>
+    <Container>
+      <TopMenu />
+
       {/* {user.isFetch
         ? <MySpin />
-        : (
-          <> */}
-      <TopMenu />
+        : ( */}
       <Routes>
         <Route path="/" element={<Main />} />
         <Route
@@ -53,12 +52,10 @@ function App() {
         <Route path="/queue" element={<Queue />} />
         <Route path="/tournament" element={<Tournament />} />
       </Routes>
+      {/* )} */}
       <Menu />
-      {/* </>
-        )} */}
-
-      {/* </Container> */}
-    </div>
+    </Container>
+  // </div>
   );
 }
 
