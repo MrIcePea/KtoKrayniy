@@ -18,7 +18,7 @@ function Menu() {
         </div>
         <div className="menu-item-wrapper">
           <li>
-            <Link to="/tournament"><img className="menu-img" src="/images/tournament.jpeg" alt="Rating" /></Link>
+            <Link to="/tournaments"><img className="menu-img" src="/images/tournament.jpeg" alt="Rating" /></Link>
           </li>
         </div>
       </div>
