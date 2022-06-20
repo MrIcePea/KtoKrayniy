@@ -23,7 +23,7 @@ export const Tournament = (value) => ({
 export const getTournament = (id) => async (dispatch) => {
   try {
     const response = await axios({ url: `tournaments/${id}`, baseURL: 'http://localhost:3001/' });
-    dispatch(Tournaments(response.data));
+    dispatch(Tournament(response.data));
   } catch (err) {
     console.log(err);
   }

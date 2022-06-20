@@ -1,14 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getTournament, getTournaments } from '../../Redux/Actions/tournamentsAction';
 
-function Tournament() {
+function Tournaments() {
   const dispatch = useDispatch();
-  const { id } = useParams();
-  useEffect(() => {
-    dispatch(getTournament(id));
-  }, [id]);
   const { tournaments } = useSelector((state) => state);
   useEffect(() => {
     if (!tournaments.length) {
@@ -18,9 +14,9 @@ function Tournament() {
   return (
     <div>
       Tournaments
-      {tournaments.map((el) => (<a href={el.id}>{el.name}</a>))}
+      {tournaments.map((el) => (<Link to={`/tournaments/${el.id}`} key={el.id}>{el.name}</Link>))}
     </div>
   );
 }
 
-export default Tournament;
+export default Tournaments;

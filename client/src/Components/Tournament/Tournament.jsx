@@ -9,11 +9,15 @@ function Tournament() {
   const { tournament } = useSelector((state) => state);
   useEffect(() => {
     dispatch(getTournament(id));
+    console.log('-----', id);
   }, [id]);
   return (
     <div>
-      {tournament.name}
-      {tournament.date}
+      {tournament.map((el) => (
+        <div key={el.id}>
+          <p>{el.round}</p>
+        </div>
+      ))}
     </div>
   );
 }
