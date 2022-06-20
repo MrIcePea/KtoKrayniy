@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
-import getAllUsersReducer from './getAllUsersReducer';
+import SoloRankReducer from './soloRankReducer';
+import DuoRankReducer from './duoRankReducer';
 import getQueueReducer from './getQueueReducer';
 
 const rootReducer = combineReducers({
-  users: getAllUsersReducer,
+  soloRank: SoloRankReducer,
+  duoRank: DuoRankReducer,
   queue: getQueueReducer,
 });
 
