@@ -1,19 +1,24 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getTournament } from '../../Redux/Actions/tournamentsAction';
+import { getTournament, getTournaments } from '../../Redux/Actions/tournamentsAction';
 
 function Tournament() {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { tournament } = useSelector((state) => state);
   useEffect(() => {
     dispatch(getTournament(id));
   }, [id]);
+  const { tournaments } = useSelector((state) => state);
+  useEffect(() => {
+    if (!tournaments.length) {
+      dispatch(getTournaments());
+    }
+  }, []);
   return (
     <div>
-      {tournament.name}
-      {tournament.date}
+      Tournaments
+      {tournaments.map((el) => (<a href={el.id}>{el.name}</a>))}
     </div>
   );
 }
