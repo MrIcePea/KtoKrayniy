@@ -1,0 +1,25 @@
+.nav-link {
+  color: red;
+  margin: 15px 20px;
+}
+
+.tabs__block {
+  display: none;
+}
+
+.tabs__block:target {
+  display: block;
+}
+
+.tabs__items{
+  display: flex;
+}
+
+.tabs__item {
+  margin: 0px 0px;
+  flex: 0 1 33.333%;
+}
+
+.nav-item {
+  margin: 0px 0px;
+}

@@ -10,14 +10,13 @@ import { userLogOut } from '../../Redux/Actions/signAction';
 
 export default function TopMenu() {
   const { user } = useSelector((state) => state);
-  console.log('--->', user);
 
   const dispatch = useDispatch();
   const logOutHAndler = () => {
     dispatch(userLogOut());
   };
   return (
-    <div>
+    <div className="header">
       <Navbar
         color="dark"
         expand="md"
