@@ -5,9 +5,11 @@ import Auth from './Components/Auth/Auth';
 import Exit from './Components/Exit/Exit';
 import Menu from './Components/Menu/Menu';
 import Queue from './Components/Queue/Queue';
-import Rating from './Components/Rating/Rating';
 import Registration from './Components/Registration/Registration';
 import Tournament from './Components/Tournament/Tournament';
+import SoloRankings from './Components/Rating/SoloRankings';
+import DuoRankings from './Components/Rating/DuoRankings';
+import Rankings from './Components/Rating/Rankings';
 
 function App() {
   return (
@@ -16,9 +18,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Auth />} />
         <Route path="/registration" element={<Registration />} />
-        <Route path="/rankings" element={<Rating />} />
+        <Route path="/rankings" element={<Rankings />}>
+          <Route path="/rankings/solo" element={<SoloRankings />} />
+          <Route path="/rankings/duo" element={<DuoRankings />} />
+        </Route>
         <Route path="/queue" element={<Queue />} />
         <Route path="/tournament" element={<Tournament />} />
+        <Route path="/tournament/:id" element={<Tournament />} />
       </Routes>
       <Menu />
     </div>

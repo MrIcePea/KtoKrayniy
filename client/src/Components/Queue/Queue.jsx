@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { getQueue } from '../../Redux/Actions/getQueueAction';
+import ChangeModeMenu from './ChangeModeMenu';
 
 function Queue() {
   const dispatch = useDispatch();
@@ -12,12 +14,19 @@ function Queue() {
   }, []);
 
   return (
-    <div>
-      Queue
-      {queue.map((el) => (
-        <div key={el.id}>{el.user_id}</div>
-      ))}
-    </div>
+    <>
+      <ChangeModeMenu />
+      <div>
+        Queue
+        {queue.map((el) => (
+          <div key={el.id}>
+            {el.id}
+            {' '}
+            {el.User.nickName}
+          </div>
+        ))}
+      </div>
+    </>
   );
 }
 
