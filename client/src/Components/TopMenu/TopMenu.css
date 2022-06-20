@@ -12,3 +12,11 @@
 .active{
   color: red;
 }
+
+.navbar-text {
+  color: black;
+}
+
+/* .navbar-nav {
+  justify-content: space-around;
+} */

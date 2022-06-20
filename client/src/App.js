@@ -19,6 +19,7 @@ import Tournament from './Components/Tournament/Tournament';
 import { checkUser } from './Redux/Actions/signAction';
 import AuthRouter from './Components/AuthRouter/AuthRouter';
 import MySpin from './Components/MySpin/MySpin';
+import AuthMenu from './Components/AuthMenu/AuthMenu';
 
 function App() {
   const { user } = useSelector((state) => state);
@@ -64,7 +65,9 @@ function App() {
         </Container>
       </div>
       <div className="footer">
-        <Menu />
+        <AuthMenu>
+         <Menu />
+        </AuthMenu>
       </div>
     </div>
   );
