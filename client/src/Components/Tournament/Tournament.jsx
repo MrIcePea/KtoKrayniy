@@ -26,7 +26,10 @@ function Tournament() {
       {tournament.map((el, index) => (
         <div className="tabs__block" id={`tab-${index}`}>
           {el.players.map((elem) => (
-            <p>{elem.user_id}</p>
+            <div className="item-user-wrapper">
+              <p>{elem.User.nickName}</p>
+              <p>{elem.User.id}</p>
+            </div>
           ))}
         </div>
 
