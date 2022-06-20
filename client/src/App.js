@@ -50,14 +50,13 @@ function App() {
                 </AuthRouter>
 )}
             />
-        
-        <Route path="/rankings" element={<Rankings />}>
-          <Route path="/rankings/solo" element={<SoloRankings />} />
-          <Route path="/rankings/duo" element={<DuoRankings />} />
-        </Route>
-        <Route path="/queue" element={<Queue />} />
-        <Route path="/tournaments" element={<Tournaments />} />
-        <Route path="/tournaments/:id" element={<Tournament />} />
+            <Route path="/rankings" element={<Rankings />}>
+              <Route path="/rankings/solo" element={<SoloRankings />} />
+              <Route path="/rankings/duo" element={<DuoRankings />} />
+            </Route>
+            <Route path="/queue" element={<Queue />} />
+            <Route path="/tournaments" element={<Tournaments />} />
+            <Route path="/tournaments/:id" element={<Tournament />} />
           </Routes>
         )}
       <Menu />
