@@ -15,7 +15,7 @@ function Queue() {
     <div>
       Queue
       {queue.map((el) => (
-        <div key={el.id}>{el.user_id}</div>
+        <div key={el.id}>{el.User.nickName}</div>
       ))}
     </div>
   );
