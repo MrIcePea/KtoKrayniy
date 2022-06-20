@@ -7,7 +7,7 @@ const checkSession = (req, res, next) => {
       id: req.session.user.id,
       role: req.session.user.role,
     };
-    // return next();
+    return next();
   }
   next();
 };

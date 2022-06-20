@@ -27,32 +27,32 @@ function App() {
     <Container>
       <TopMenu />
 
-      {/* {user.isFetch
+      {user.isFetch
         ? <MySpin />
-        : ( */}
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route
-          path="/signin"
-          element={(
-            <AuthRouter>
-              <SignIn />
-            </AuthRouter>
+        : (
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route
+              path="/signin"
+              element={(
+                <AuthRouter>
+                  <SignIn />
+                </AuthRouter>
 )}
-        />
-        <Route
-          path="/signup"
-          element={(
-            <AuthRouter>
-              <SignUp />
-            </AuthRouter>
+            />
+            <Route
+              path="/signup"
+              element={(
+                <AuthRouter>
+                  <SignUp />
+                </AuthRouter>
 )}
-        />
-        <Route path="/rating" element={<Rating />} />
-        <Route path="/queue" element={<Queue />} />
-        <Route path="/tournament" element={<Tournament />} />
-      </Routes>
-      {/* )} */}
+            />
+            <Route path="/rating" element={<Rating />} />
+            <Route path="/queue" element={<Queue />} />
+            <Route path="/tournament" element={<Tournament />} />
+          </Routes>
+        )}
       <Menu />
     </Container>
   // </div>
