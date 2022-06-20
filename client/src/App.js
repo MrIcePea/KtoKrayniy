@@ -66,7 +66,7 @@ function App() {
       </div>
       <div className="footer">
         <AuthMenu>
-         <Menu />
+          <Menu />
         </AuthMenu>
       </div>
     </div>
