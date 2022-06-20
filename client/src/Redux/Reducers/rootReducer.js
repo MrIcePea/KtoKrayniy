@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import userReducer from './userReducer';
 import SoloRankReducer from './soloRankReducer';
 import DuoRankReducer from './duoRankReducer';
 import getQueueReducer from './getQueueReducer';
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   queue: getQueueReducer,
   tournaments: tournamentsReducer,
   tournament: tournamentReducer,
+  user: userReducer,
 });
 
 export default rootReducer;

@@ -30,5 +30,8 @@ module.exports = {
     'jsx-a11y/no-static-element-interactions': 0,
     'react/jsx-no-constructed-context-values': 0,
     'default-param-last': 0,
+    'import/prefer-default-export': 0,
+    'no-multiple-empty-lines': 0,
+
   },
 };
