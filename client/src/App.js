@@ -10,7 +10,7 @@ import Tournaments from './Components/Tournament/Tournaments';
 import SoloRankings from './Components/Rating/SoloRankings';
 import DuoRankings from './Components/Rating/DuoRankings';
 import Rankings from './Components/Rating/Rankings';
-import { Tournament } from './Redux/Actions/tournamentsAction';
+import Tournament from './Components/Tournament/Tournament';
 
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
         </Route>
         <Route path="/queue" element={<Queue />} />
         <Route path="/tournaments" element={<Tournaments />} />
-        <Route path="/tournament/:id" element={<Tournament />} />
+        <Route path="/tournaments/:id" element={<Tournament />} />
       </Routes>
       <Menu />
     </div>
