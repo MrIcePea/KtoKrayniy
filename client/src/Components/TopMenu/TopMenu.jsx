@@ -7,6 +7,7 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink as DomLink } from 'react-router-dom';
 import { userLogOut } from '../../Redux/Actions/signAction';
+import './TopMenu.css';
 
 export default function TopMenu() {
   const { user } = useSelector((state) => state);
@@ -19,12 +20,12 @@ export default function TopMenu() {
   return (
     <div>
       <Navbar
-        color="dark"
+        color="light"
         expand="md"
-        dark
+        // dark
       >
         <NavbarBrand href="/">
-          🏓
+          <img src="/images/logo.jpeg" alt="" width="70px" />
         </NavbarBrand>
         <Collapse navbar>
           <Nav
