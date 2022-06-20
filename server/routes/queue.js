@@ -11,9 +11,6 @@ router.get('/getqueue', async (req, res) => {
         model: User,
         where: { role: 'user' },
         attributes: { exclude: ['role', 'pass'] },
-        order: [
-          ['rank', 'DESC'],
-        ],
       },
     },
   );

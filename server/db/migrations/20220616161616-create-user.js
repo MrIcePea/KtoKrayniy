@@ -28,13 +28,22 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      rank: {
+      solorank: {
         type: Sequelize.INTEGER,
       },
-      won: {
+      duorank: {
         type: Sequelize.INTEGER,
       },
-      lost: {
+      solowon: {
+        type: Sequelize.INTEGER,
+      },
+      sololost: {
+        type: Sequelize.INTEGER,
+      },
+      duowon: {
+        type: Sequelize.INTEGER,
+      },
+      duolost: {
         type: Sequelize.INTEGER,
       },
       active: {
