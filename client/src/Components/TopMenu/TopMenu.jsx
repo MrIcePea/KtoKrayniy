@@ -11,14 +11,13 @@ import './TopMenu.css';
 
 export default function TopMenu() {
   const { user } = useSelector((state) => state);
-  console.log('--->', user);
 
   const dispatch = useDispatch();
   const logOutHAndler = () => {
     dispatch(userLogOut());
   };
   return (
-    <div>
+    <div className="header">
       <Navbar
         color="light"
         expand="md"
