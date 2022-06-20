@@ -1,6 +1,6 @@
 const games = require('../testData/games');
 const tournaments = require('../testData/tournaments');
-const users = require('../testData/users');
+const getUsers = require('../testData/users');
 const tourGames = require('../testData/tourGames');
 const queues = require('../testData/queues');
 const duoreg = require('../testData/duoreg');
@@ -17,6 +17,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
+    const users = await getUsers();
     await queryInterface.bulkInsert('Users', users, {});
     await queryInterface.bulkInsert('Games', games, {});
     await queryInterface.bulkInsert('Tournaments', tournaments, {});
