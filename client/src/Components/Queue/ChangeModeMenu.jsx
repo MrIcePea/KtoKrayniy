@@ -1,24 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Menu.css';
 
-function Menu() {
+function ChangeModeMenu() {
   return (
     <ul>
       <div className="menu-wrapper">
         <div className="menu-item-wrapper">
           <li>
-            <Link to="/rankings/solo"><img className="menu-img" src="/images/rating.jpeg" alt="Rating" /></Link>
+            <Link to="/queue/1v1"><img className="menu-img" src="/images/1v1.jpeg" alt="Rating" /></Link>
           </li>
         </div>
         <div className="menu-item-wrapper">
           <li>
-            <Link to="/queue"><img className="menu-img" src="/images/queue.jpeg" alt="Rating" /></Link>
+            <Link to="/queue/2v2"><img className="menu-img" src="/images/2v2.jpeg" alt="Rating" /></Link>
           </li>
         </div>
         <div className="menu-item-wrapper">
           <li>
-            <Link to="/tournaments"><img className="menu-img" src="/images/tournament.jpeg" alt="Rating" /></Link>
+            <Link to="/queue/circle"><img className="menu-img" src="/images/circle.jpeg" alt="Rating" /></Link>
           </li>
         </div>
       </div>
@@ -26,4 +25,4 @@ function Menu() {
   );
 }
 
-export default Menu;
+export default ChangeModeMenu;

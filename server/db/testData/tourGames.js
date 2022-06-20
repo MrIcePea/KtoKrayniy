@@ -72,14 +72,14 @@ const tournaments = [{
   tour_id: 1,
   user_id: 9,
   position: 13,
-  got_to: '1/2',
+  got_to: '1/4',
   createdAt: new Date(),
   updatedAt: new Date(),
 }, {
   tour_id: 1,
   user_id: 13,
   position: 14,
-  got_to: '1/2',
+  got_to: 'third',
   createdAt: new Date(),
   updatedAt: new Date(),
 }, {

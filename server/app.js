@@ -11,8 +11,13 @@ const { checkSession, checkLogin } = require('./middleWare/middleWare');
 const indexRouter = require('./routers/indexRouter');
 const checkRouter = require('./routers/checkRouter');
 
+
+const usersRouter = require('./routes/users');
+const queueRouter = require('./routes/queue');
+const tournamentsRouter = require('./routes/tournaments');
+
 const app = express();
-const PORT = 3000;
+const { PORT } = process.env;
 
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
@@ -40,10 +45,12 @@ app.use(session({
     httpOnly: true,
   },
 }));
-
 app.use(checkSession);
 app.use('/', indexRouter);
 app.use('/check', checkRouter);
+app.use('/users', usersRouter);
+app.use('/queue', queueRouter);
+app.use('/tournaments', tournamentsRouter);
 
 // Если HTTP-запрос дошёл до этой строчки, значит ни один из ранее встречаемых рутов не ответил на запрос. Это значит, что искомого раздела просто нет на сайте. Для таких ситуаций используется код ошибки 404. Создаём небольшое middleware, которое генерирует соответствующую ошибку.
 app.use((req, res, next) => {

@@ -10,7 +10,11 @@ import Main from './Components/Main/Main';
 import TopMenu from './Components/TopMenu/TopMenu';
 import Menu from './Components/Menu/Menu';
 import Queue from './Components/Queue/Queue';
-import Rating from './Components/Rating/Rating';
+import Registration from './Components/Registration/Registration';
+import Tournaments from './Components/Tournament/Tournaments';
+import SoloRankings from './Components/Rating/SoloRankings';
+import DuoRankings from './Components/Rating/DuoRankings';
+import Rankings from './Components/Rating/Rankings';
 import Tournament from './Components/Tournament/Tournament';
 import { checkUser } from './Redux/Actions/signAction';
 import AuthRouter from './Components/AuthRouter/AuthRouter';
@@ -23,10 +27,8 @@ function App() {
     dispatch(checkUser());
   }, []);
   return (
-  // <div>
     <Container>
       <TopMenu />
-
       {user.isFetch
         ? <MySpin />
         : (
@@ -48,14 +50,18 @@ function App() {
                 </AuthRouter>
 )}
             />
-            <Route path="/rating" element={<Rating />} />
-            <Route path="/queue" element={<Queue />} />
-            <Route path="/tournament" element={<Tournament />} />
+        
+        <Route path="/rankings" element={<Rankings />}>
+          <Route path="/rankings/solo" element={<SoloRankings />} />
+          <Route path="/rankings/duo" element={<DuoRankings />} />
+        </Route>
+        <Route path="/queue" element={<Queue />} />
+        <Route path="/tournaments" element={<Tournaments />} />
+        <Route path="/tournaments/:id" element={<Tournament />} />
           </Routes>
         )}
       <Menu />
     </Container>
-  // </div>
   );
 }
 
