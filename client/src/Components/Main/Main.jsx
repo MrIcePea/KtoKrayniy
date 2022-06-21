@@ -11,7 +11,7 @@ function Main() {
   return (
     <AuthMain>
       <div className="rega">
-        <ButtonGroup className="buttony">
+        {/* <ButtonGroup className="buttony">
           <NavItem>
             <DomLink to="/signup" className="lign">
               <Button className="buttt">
@@ -26,7 +26,7 @@ function Main() {
               </Button>
             </DomLink>
           </NavItem>
-        </ButtonGroup>
+        </ButtonGroup> */}
       </div>
     </AuthMain>
   );

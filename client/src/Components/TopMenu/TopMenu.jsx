@@ -1,11 +1,6 @@
 import React from 'react';
-import {
-  Collapse, DropdownItem, DropdownMenu, DropdownToggle,
-  Nav, Navbar, NavbarBrand, NavbarText,
-  NavItem, NavLink, UncontrolledDropdown,
-} from 'reactstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink as DomLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { userLogOut } from '../../Redux/Actions/signAction';
 import './TopMenu.css';
 
@@ -18,12 +13,51 @@ export default function TopMenu() {
   };
   return (
     <div className="header">
-      <Navbar
+      <div className="logo-wrapper">
+        <Link to="/queue"><img src="/images/logo.svg" alt="" width="70px" /></Link>
+      </div>
+      <div className="menu-item-wrapper">
+        {!user.name
+          && (
+            <ul>
+              <div className="auth-menu-wrapper">
+                <div className="auth-menu-item-wrapper">
+                  <li>
+                    <Link to="/signin"><button type="submit" className="logout-btn">Войти</button></Link>
+                  </li>
+                </div>
+                <div className="auth-menu-item-wrapper">
+                  <li>
+                    <Link to="/signup"><button type="submit" className="logout-btn">Регистрация</button></Link>
+                  </li>
+                </div>
+              </div>
+            </ul>
+          )}
+        {user.name
+          ? (
+            <div className="topmenu-wrapper">
+              <div className="topmenu-wrapper-text">
+                <p>
+                  Привет,
+                  {user.name}
+                </p>
+              </div>
+              <div className="topmenu-wrapper-btn">
+                <button type="submit" className="logout-btn" onClick={logOutHAndler}>Выйти</button>
+              </div>
+            </div>
+          )
+
+          : ''}
+      </div>
+
+      {/* <Navbar
         color="light"
         expand="md"
         // dark
       >
-        <NavbarBrand href="/">
+        <NavbarBrand href="/queue">
           <img src="/images/logo.jpeg" alt="" width="70px" />
         </NavbarBrand>
         <Collapse navbar>
@@ -46,7 +80,7 @@ export default function TopMenu() {
               </NavItem>
             </>
             )}
-            <UncontrolledDropdown
+            {/* <UncontrolledDropdown
               inNavbar
               nav
             >
@@ -68,13 +102,8 @@ export default function TopMenu() {
                   Reset
                 </DropdownItem>
               </DropdownMenu>
-            </UncontrolledDropdown>
-          </Nav>
-          <NavbarText onClick={logOutHAndler}>
-            { user.name ? `Hi, ${user.name} 🚪` : 'Login please'}
-          </NavbarText>
-        </Collapse>
-      </Navbar>
+            </UncontrolledDropdown> */}
+
     </div>
   );
 }

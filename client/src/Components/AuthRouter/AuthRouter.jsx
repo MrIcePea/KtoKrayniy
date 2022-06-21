@@ -8,7 +8,7 @@ function AuthRouter({ children }) {
   if (!user.name) {
     return children;
   }
-  return <Navigate to="/" state={{ from: location }} replace />;
+  return <Navigate to="/queue" state={{ from: location }} replace />;
 }
 
 export default AuthRouter;

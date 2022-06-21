@@ -17,6 +17,54 @@
   color: black;
 }
 
-/* .navbar-nav {
+.header {
+  margin-top: 5px;
+  min-width: 320px;
+  display: flex;
+}
+
+.logo-wrapper {
+  width: 70px;
+}
+
+.logout-btn {
+  width: 120px;
+  height: 30px;
+  font-size: 12px;
+  background-color: #003686;
+  color: white;
+  border: 0;
+}
+
+.logout-btn:hover {
+  background-color: #134a9e;
+}
+
+.topmenu-wrapper {
+  width: auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.menu-item-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   justify-content: space-around;
-} */
+}
+
+.topmenu-wrapper-text {
+  margin: 0px 10px;
+}
+
+.topmenu-wrapper-btn {
+  margin: 0px 0px 0px 0px;
+}
+
+.auth-menu-wrapper {
+  display: flex;
+}
+
+.auth-menu-item-wrapper {
+  margin: 0px 5px;
+}
