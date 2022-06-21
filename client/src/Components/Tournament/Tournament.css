@@ -123,13 +123,13 @@
 .create-tournament-btn {
   width: 120px;
   height: 40px;
-  background-color: #003686;
+  background-color: #171b20;
   color: white;
   border: 0;
 }
 
 .create-tournament-btn:hover {
-  background-color: #134a9e;
+  background-color: #31353b;
 }
 
 .winner {
