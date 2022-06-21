@@ -22,6 +22,7 @@ import MySpin from './Components/MySpin/MySpin';
 import AuthMenu from './Components/AuthMenu/AuthMenu';
 import NewTournament from './Components/Tournament/NewTournament';
 
+
 function App() {
   const { user } = useSelector((state) => state);
   const dispatch = useDispatch();
@@ -61,7 +62,7 @@ function App() {
                 <Route path="/queue" element={<Queue />} />
                 <Route path="/tournaments" element={<Tournaments />} />
                 <Route path="/tournaments/:id" element={<Tournament />} />
-                <Route path="/tournaments/add-new" element={<NewTournament />} />
+                <Route path="/tournaments/:id/registration" element={<NewTournament />} />
               </Routes>
             )}
         </Container>
