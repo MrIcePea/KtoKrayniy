@@ -8,7 +8,7 @@ export const Queue = (value) => ({
 
 export const getQueue = () => async (dispatch) => {
   try {
-    const response = await axios({ url: 'queue/getqueue', baseURL: 'http://localhost:3001/' });
+    const response = await axios({ url: 'queue/getqueue' });
     dispatch(Queue(response.data));
   } catch (err) {
     console.log(err);

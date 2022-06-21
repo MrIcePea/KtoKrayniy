@@ -10,7 +10,7 @@ import { userLogOut } from '../../Redux/Actions/signAction';
 
 export default function TopMenu() {
   const { user } = useSelector((state) => state);
-  console.log('--->', user);
+  // console.log('user---TopMenu-------->', user);
 
   const dispatch = useDispatch();
   const logOutHAndler = () => {

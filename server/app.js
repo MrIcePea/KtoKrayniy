@@ -24,8 +24,8 @@ const sessionParser = session({
   store: new FileStore({}),
   name: 'sID',
   secret: 'user',
-  resave: true,
-  saveUninitialized: true,
+  resave: false,
+  saveUninitialized: false,
   cookie: {
     expires: 24 * 60 * 60e3,
     httpOnly: false,
@@ -101,17 +101,21 @@ const server = http.createServer(app);
 const wss = new WebSocketServer({ clientTracking: false, noServer: true });
 // Part1
 server.on('upgrade', (req, socket, head) => {
-  console.log('Parsing session from request...');
+  console.log('Зпауск WS...');
 
   //  провервка наличия сессии, если нужно рассылать всем за закоментить sessionParser
   sessionParser(req, {}, () => {
-    // if (!req.session.user?.id) {
-    //   socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
-    //   socket.destroy();
-    //   return;
-    // }
+    // console.log('Проверка на наличие сессии, в случае ее отсутствия убивается сокет');
+    // console.log('--->>> значение пришедей сессии', req.session.user);
+    if (!req.session.user) {
+      socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
+      socket.destroy();
+      console.log('Сокет убит!');
+      return;
+    }
 
     wss.handleUpgrade(req, socket, head, (ws) => {
+      // console.log('Апгрейд соединения http+ws в текущей сессии - ws - ОЧЕНЬ БОЛЬШОЙ ОБЪЕКТ');
       wss.emit('connection', ws, req);
     });
   });
@@ -122,15 +126,22 @@ const mapQueue = [];
 // Part2
 wss.on('connection', (ws, req) => {
   // console.log('onConnection', req.session);
+  // console.log('----wss - соединение -----');
   const id = req.session.user?.id || uuidv4();
   // console.log('userId ----->>>>>', id);
   ws.userId = id;
-  // console.log('ws.userId  ----->>>>>', ws);
+  // console.log('присваиваем ws.userId = req.session.user.id  =  ', ws.userId);
+  // console.log(' WS уникальный идентификаторо пользователя  = БОЛЬШОЙ ОБЪЕКТ ws');
   // ws - идентификатор конкретного юзера
   // map.set(ws);
   mapQueue.push(ws);
+  // console.log(' загоняем WS пользователя в массив mapQueue - текущее значение = ', mapQueue.length);
 
-  async function getQueue(ws) {
+  // ws.send(JSON.stringify({ type: 'test', payload: 'ololo' }));
+  // console.log('Отправили текущему ws пользователю  ws.send(JSON.stringify({ type: test, payload: ololo })');
+
+  async function getQueue() {
+    // console.log('13--------------------');
     const queue = await Queue.findAll(
       {
         order: [
@@ -143,24 +154,28 @@ wss.on('connection', (ws, req) => {
         },
       },
     );
+    // console.log('11--------------------');
     const message = { type: 'START', params: { queue } };
 
     mapQueue.forEach((el) => el.send(JSON.stringify(message)));
+    // console.log('12--------------------');
     // console.log('map ---->', map);
     // ws.send(JSON.stringify(message));
   }
 
   ws.on('message', (message) => {
+    console.log('message----------->>>', JSON.parse(message));
     const { type, params } = JSON.parse(message);
     switch (type) {
       case 'START':
-        getQueue(ws);
+        getQueue();
+        // console.log('14--------------------', message);
         break;
       default:
         console.log('error switch onmessage');
         break;
     }
-    //
+
     // Here we can now use session parameters.
     //
     // console.log('JSON.parse(message)', JSON.parse(message));
@@ -169,9 +184,11 @@ wss.on('connection', (ws, req) => {
 
   ws.on('close', () => {
     map.delete(id);
+    console.log('15--------------------');
   });
 });
 
 server.listen(PORT, () => {
+  console.log('000--------------------');
   console.log(`server started PORT: ${PORT}`);
 });

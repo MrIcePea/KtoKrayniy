@@ -21,6 +21,7 @@ function Queue() {
   const dispatch = useDispatch();
   useEffect(() => {
     if (!queue.length) {
+      console.log('!queue.length-------->>>');
       dispatch(wsSendStart(socket));
       // dispatch(getQueue());
     }

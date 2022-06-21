@@ -10,6 +10,7 @@ router.route('/')
 
 router.route('/signout')
   .get((req, res) => {
+    console.log('<<----- GET запрос на уничт сессии и чистку КУКов');
     req.session.destroy();
     res.clearCookie('sid').sendStatus(200);
   });
@@ -17,13 +18,12 @@ router.route('/signout')
 router.route('/signin')
   .post(async (req, res) => {
     const { nickName, pass } = req.body;
-    console.log('-->>', nickName, pass);
+    console.log(`<<----- Пришел POST запрос на авторизацию nickName-${nickName}, pass-${pass}`);
     if (nickName && pass) {
-      console.log('--<<', nickName, pass);
       const user = await User.findOne({ where: { nickName } });
       if (user && await bcrypt.compare(pass, user.pass)) {
         req.session.user = { name: user.nickName, id: user.id, role: user.role };
-        console.log('----<<<<', req.session);
+        console.log(`----->> Отправляем через res.json - session.user - - nickName - ${user.nickName}, user.id - ${user.id}, user.role - ${user.role}`);
         return res.json({ name: user.nickName, id: user.id, role: user.role });
       }
       return res.sendStatus(402);
@@ -36,25 +36,25 @@ router.route('/signup')
     const {
       nickName, pass, firstName, lastName,
     } = req.body;
+    console.log(`<<----- Пришел POST запрос на регистрацию nickName-${nickName}, pass-${pass}`);
     if (nickName && pass && firstName && lastName) {
-      const user = await User.findOne({ where: { nickName } });
-      if (user) {
+      const user1 = await User.findOne({ where: { nickName } });
+      if (user1) {
         return res.sendStatus(401);
-      } else {
-        const user = await User.create({
-          ...req.body,
-          role: 'user',
-          active: true,
-          ban: false,
-          rank: 0,
-          won: 0,
-          lost: 0,
-          pass: await bcrypt.hash(pass, 10),
-        });
-        // console.log('----->>', JSON.stringify(user));
-        req.session.user = { name: user.nickName, id: user.id, role: user.role };
-        return res.json({ name: user.nickName, id: user.id, role: user.role });
       }
+      const user = await User.create({
+        ...req.body,
+        role: 'user',
+        active: true,
+        ban: false,
+        rank: 0,
+        won: 0,
+        lost: 0,
+        pass: await bcrypt.hash(pass, 10),
+      });
+      req.session.user = { name: user.nickName, id: user.id, role: user.role };
+      console.log(`----->> Отправляем через res.json зарегестрированного юзера с - session.user - - nickName - ${user.nickName}, user.id - ${user.id}, user.role - ${user.role}`);
+      return res.json({ name: user.nickName, id: user.id, role: user.role });
     }
     return res.sendStatus(401);
   });
@@ -62,6 +62,7 @@ router.route('/signup')
 router.route('/check')
   .post((req, res) => {
     if (req.session.user) {
+      console.log(`----->> Проверка наличия сесси /check/check/. Отправляем ${req.session.user}`);
       return res.json(req.session.user);
     }
     return res.sendStatus(401);

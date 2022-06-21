@@ -8,7 +8,7 @@ export const soloRanks = (value) => ({
 
 export const getSoloRanks = () => async (dispatch) => {
   try {
-    const response = await axios({ url: 'users/get/solo/rankings', baseURL: 'http://localhost:3001/' });
+    const response = await axios({ url: 'users/get/solo/rankings' });
     dispatch(soloRanks(response.data));
   } catch (err) {
     console.log(err);
@@ -22,7 +22,7 @@ export const duoRanks = (value) => ({
 
 export const getDuoRanks = () => async (dispatch) => {
   try {
-    const response = await axios({ url: 'users/get/duo/rankings', baseURL: 'http://localhost:3001/' });
+    const response = await axios({ url: 'users/get/duo/rankings' });
     dispatch(duoRanks(response.data));
   } catch (err) {
     console.log(err);
