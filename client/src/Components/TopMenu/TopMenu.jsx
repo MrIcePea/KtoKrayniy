@@ -23,7 +23,7 @@ export default function TopMenu() {
         expand="md"
         dark
       >
-        <NavbarBrand href="/">
+        <NavbarBrand>
           🏓
         </NavbarBrand>
         <Collapse navbar>
@@ -46,7 +46,7 @@ export default function TopMenu() {
               </NavItem>
             </>
             )}
-            <UncontrolledDropdown
+            {/* <UncontrolledDropdown
               inNavbar
               nav
             >
@@ -68,7 +68,7 @@ export default function TopMenu() {
                   Reset
                 </DropdownItem>
               </DropdownMenu>
-            </UncontrolledDropdown>
+            </UncontrolledDropdown> */}
           </Nav>
           <NavbarText onClick={logOutHAndler}>
             { user.name ? `Hi, ${user.name} 🚪` : 'Login please'}
