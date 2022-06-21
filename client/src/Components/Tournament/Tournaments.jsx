@@ -22,8 +22,7 @@ function Tournaments() {
             <input type="text" className="form-control" id="tournament-name" placeholder="" />
           </div>
           <div className="tournament-select-wrapper">
-            <select className="form-select" aria-label="Default select example">
-              <option selected>Тип турнира</option>
+            <select className="form-select" aria-label="Default select example" defaultValue="Тип турнира">
               <option value="1">1х1</option>
               <option value="2">2х2</option>
             </select>
@@ -54,7 +53,7 @@ function Tournaments() {
         </form>
       </div>
       <div className="tournaments-wrapper">
-        {tournaments.map((el) => (<div className="tournament-wrapper"><Link className="tournament-item-link" to={`/tournaments/${el.id}`} key={el.id}><div className="tournament-item">{el.name}</div></Link></div>))}
+        {tournaments.map((el) => (<div className="tournament-wrapper" key={el.id}><Link className="tournament-item-link" to={`/tournaments/${el.id}`}><div className="tournament-item">{el.name}</div></Link></div>))}
       </div>
     </>
   );

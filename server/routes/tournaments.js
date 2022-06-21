@@ -53,7 +53,7 @@ router.get('/:id', async (req, res) => {
     }
     thirdPlaceGamePlayersPair.push(pl);
   });
-  const thirdPlaceGame = { round: '3rd', playerPairs: thirdPlaceGamePlayersPair };
+  const thirdPlaceGame = { round: '3rd', playerPairs: [thirdPlaceGamePlayersPair] };
   for (let i = firstRoundIndex; i < placements.length; i += 1) {
     // eslint-disable-next-line max-len
     const players = tournamentWithSpaces.filter((el) => el.got_to === placements[i] || placements.indexOf(el.got_to) >= i);

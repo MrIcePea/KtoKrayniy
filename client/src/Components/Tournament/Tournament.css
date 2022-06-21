@@ -131,3 +131,16 @@
 .create-tournament-btn:hover {
   background-color: #134a9e;
 }
+
+.winner {
+  color: greenyellow
+}
+
+.loser {
+  color: red
+}
+
+.myCol {
+  display:flex;
+  justify-content: center;
+}
