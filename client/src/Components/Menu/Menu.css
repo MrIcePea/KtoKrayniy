@@ -4,15 +4,23 @@
 
 .menu-item-wrapper {
   display: flex;
-  border: 1px solid black;
-  margin: 0px 10px;
+  margin: 0px 2px;
 }
 
 .menu-img {
-  width: 50px;
+  padding: 10px 10px;
+  width: 100px;
   height: 50px;
+  background-color: #003686;
+  border: 0px;
+}
+
+.menu-img:hover {
+  background-color: #134a9e;
 }
 
 li {
   list-style-type: none;
 }
+
+

@@ -1,0 +1,155 @@
+.nav-link {
+  color: red;
+  margin: 15px 20px;
+}
+
+.tabs__block {
+  display: none;
+}
+
+.tabs__block:target {
+  display: block;
+}
+
+.tabs__items{
+  display: flex;
+}
+
+.tabs__item {
+  margin: 0px 0px;
+  flex: 0 1 33.333%;
+}
+
+.nav-item {
+  margin: 0px 0px;
+}
+
+.item-user-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tournaments-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tournament-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 70px;
+  background-color: #003686;
+}
+
+.tournament-item:hover {
+  background-color: #134a9e;
+}
+
+.tournament-item-link {
+  text-decoration: none;
+  color: white;
+}
+
+.tournament-item-link:hover {
+  color: white;
+}
+
+.tournament-wrapper {
+  margin: 20px 10px;
+  max-width: 320px;
+}
+
+.addtournament-wrapper {
+  margin: 20px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.tournament-name-wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 320px;
+  margin-bottom: 10px;
+}
+
+.tournament-select-wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 320px;
+  margin-bottom: 10px;
+}
+
+.tournament-start-wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 320px;
+  margin-bottom: 10px;
+}
+
+.tournament-time-wrapper {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tournament-time-inputs-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.tournament-time-input {
+  max-width: 50px;
+  margin: 0px 5px;
+  
+}
+
+.margin-0 {
+  margin: 0px;
+}
+
+.tournament-btn-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.create-tournament-btn {
+  width: 120px;
+  height: 40px;
+  background-color: #171b20;
+  color: white;
+  border: 0;
+}
+
+.create-tournament-btn:hover {
+  background-color: #31353b;
+}
+
+.winner {
+  color: greenyellow
+}
+
+.loser {
+  color: red
+}
+
+.myCol {
+  display:flex;
+  justify-content: center;
+}
+
+.registration-btn {
+  margin-top: 20px;
+  width: 200px;
+  height: 60px;
+  background-color: #d34547;
+  color: white;
+  border: 0;
+}

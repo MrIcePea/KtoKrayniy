@@ -19,6 +19,9 @@ import Tournament from './Components/Tournament/Tournament';
 import { checkUser } from './Redux/Actions/signAction';
 import AuthRouter from './Components/AuthRouter/AuthRouter';
 import MySpin from './Components/MySpin/MySpin';
+import AuthMenu from './Components/AuthMenu/AuthMenu';
+import NewTournament from './Components/Tournament/NewTournament';
+
 
 function App() {
   const { user } = useSelector((state) => state);
@@ -27,40 +30,49 @@ function App() {
     dispatch(checkUser());
   }, []);
   return (
-    <Container>
+    <div className="wrapper">
       <TopMenu />
-      {user.isFetch
-        ? <MySpin />
-        : (
-          <Routes>
-            <Route path="/" element={<Main />} />
-            <Route
-              path="/signin"
-              element={(
-                <AuthRouter>
-                  <SignIn />
-                </AuthRouter>
-)}
-            />
-            <Route
-              path="/signup"
-              element={(
-                <AuthRouter>
-                  <SignUp />
-                </AuthRouter>
-)}
-            />
-            <Route path="/rankings" element={<Rankings />}>
-              <Route path="/rankings/solo" element={<SoloRankings />} />
-              <Route path="/rankings/duo" element={<DuoRankings />} />
-            </Route>
-            <Route path="/queue" element={<Queue />} />
-            <Route path="/tournaments" element={<Tournaments />} />
-            <Route path="/tournaments/:id" element={<Tournament />} />
-          </Routes>
-        )}
-      <Menu />
-    </Container>
+      <div className="main">
+        <Container>
+          {user.isFetch
+            ? <MySpin />
+            : (
+              <Routes>
+                <Route path="/" element={<Main />} />
+                <Route
+                  path="/signin"
+                  element={(
+                    <AuthRouter>
+                      <SignIn />
+                    </AuthRouter>
+  )}
+                />
+                <Route
+                  path="/signup"
+                  element={(
+                    <AuthRouter>
+                      <SignUp />
+                    </AuthRouter>
+  )}
+                />
+                <Route path="/rankings" element={<Rankings />}>
+                  <Route path="/rankings/solo" element={<SoloRankings />} />
+                  <Route path="/rankings/duo" element={<DuoRankings />} />
+                </Route>
+                <Route path="/queue" element={<Queue />} />
+                <Route path="/tournaments" element={<Tournaments />} />
+                <Route path="/tournaments/:id" element={<Tournament />} />
+                <Route path="/tournaments/:id/registration" element={<NewTournament />} />
+              </Routes>
+            )}
+        </Container>
+      </div>
+      <div className="footer">
+        <AuthMenu>
+          <Menu />
+        </AuthMenu>
+      </div>
+    </div>
   );
 }
 
