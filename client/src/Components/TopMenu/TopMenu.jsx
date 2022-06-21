@@ -23,7 +23,7 @@ export default function TopMenu() {
               <div className="auth-menu-wrapper">
                 <div className="auth-menu-item-wrapper">
                   <li>
-                    <Link to="/signin"><button type="submit" className="logout-btn">Войти</button></Link>
+                    <Link to="/signin"><button type="submit" className="change-game-type-btn">Войти</button></Link>
                   </li>
                 </div>
                 <div className="auth-menu-item-wrapper">

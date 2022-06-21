@@ -16,15 +16,33 @@ function Queue() {
   return (
     <>
       <ChangeModeMenu />
-      <div>
-        Queue
+      <div className="queue-wrapper">
+        <img className="tennis-table-img" src="/images/table-tennis.png" alt="" />
+        <div className="gamers-wrapper">
+          <div className="gamers-wrapper-left">
+            <div className="gamer">
+              <span>Илья</span>
+            </div>
+            <div className="gamer">
+              <span>Глеб</span>
+            </div>
+          </div>
+          <div className="gamers-wrapper-right">
+            <div className="gamer">
+              <span>Илья</span>
+            </div>
+            <div className="gamer">
+              <span>Глеб</span>
+            </div>
+          </div>
+        </div>
         {queue.map((el) => (
           <div key={el.id}>
-            {el.id}
-            {' '}
-            {el.User.nickName}
+            <button type="submit" className="user-btn">{el.User.nickName}</button>
           </div>
         ))}
+
+        <button type="submit" className="stay-to-queue-btn">Встать в очередь</button>
       </div>
     </>
   );
