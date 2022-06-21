@@ -51,6 +51,9 @@ function Tournaments() {
             <button type="submit" className="create-tournament-btn">Создать</button>
           </div>
         </form>
+        <div className="tournament-btn-wrapper">
+          <Link to="/tournaments/1/registration"><button type="submit" className="registration-btn">Регистрация на турнир</button></Link>
+        </div>
       </div>
       <div className="tournaments-wrapper">
         {tournaments.map((el) => (<div className="tournament-wrapper" key={el.id}><Link className="tournament-item-link" to={`/tournaments/${el.id}`}><div className="tournament-item">{el.name}</div></Link></div>))}

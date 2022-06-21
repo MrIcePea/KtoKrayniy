@@ -144,3 +144,12 @@
   display:flex;
   justify-content: center;
 }
+
+.registration-btn {
+  margin-top: 20px;
+  width: 200px;
+  height: 60px;
+  background-color: #d34547;
+  color: white;
+  border: 0;
+}
