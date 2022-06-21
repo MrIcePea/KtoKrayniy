@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import App from './App';
 import storeR from './Redux/store';
+import TodoContextProvider from './Components/Context/Contexts';
 
 // что бы по умолчанию вэб-сервер отправлял запросы в направслении адреса в файле .env
 axios.defaults.baseURL = process.env.REACT_APP_URL;
@@ -16,7 +17,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Provider store={storeR}>
-      <App />
+      <TodoContextProvider>
+        <App />
+      </TodoContextProvider>
     </Provider>
   </BrowserRouter>,
 );

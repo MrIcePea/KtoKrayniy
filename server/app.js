@@ -1,40 +1,26 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable max-len */
 const express = require('express');
 const createError = require('http-errors');
-// const hbs = require('hbs');
 const logger = require('morgan');
 const path = require('path');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const cors = require('cors');
+// ws
+const http = require('http');
+const { WebSocketServer } = require('ws');
+const { v4: uuidv4 } = require('uuid');
 const { checkSession, checkLogin } = require('./middleWare/middleWare');
 const indexRouter = require('./routers/indexRouter');
 const checkRouter = require('./routers/checkRouter');
-
+const { Queue, User } = require('./db/models');
 
 const usersRouter = require('./routes/users');
 const queueRouter = require('./routes/queue');
 const tournamentsRouter = require('./routes/tournaments');
 
-const app = express();
-const { PORT } = process.env;
-
-app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'views'));
-// hbs.registerPartials(path.join('views', 'partials'));
-app.all('/', (req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'X-Requested-With');
-  next();
-});
-// app.use(cors());
-app.use(cors({ credentials: true, origin: true }));
-app.use(logger('dev'));
-// app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
-app.use(session({
+const sessionParser = session({
   store: new FileStore({}),
   name: 'sID',
   secret: 'user',
@@ -42,9 +28,36 @@ app.use(session({
   saveUninitialized: false,
   cookie: {
     expires: 24 * 60 * 60e3,
-    httpOnly: true,
+    httpOnly: false,
   },
-}));
+});
+const app = express();
+const map = new Map();
+const { PORT } = process.env;
+
+app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, 'views'));
+// app.all('/', (req, res, next) => {
+// const arr = ['http://192.168.1.98:3000', 'http://192.168.1.99:3000'];
+// const { origin } = req.headers;
+// if (arr.includes(origin)) {
+//   res.header('Access-Control-Allow-Origin', origin);
+// }
+// res.header('Access-Control-Allow-Origin', '*');
+// // res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+// // res.header('Access-Control-Allow-Origin', 'http://localhost:3001');
+// res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, authorization');
+// res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,PUT,OPTIONS');
+// next();
+// });
+// app.use(cors());
+app.use(cors({ credentials: true, origin: true }));
+app.use(logger('dev'));
+// app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+app.use(sessionParser);
 app.use(checkSession);
 app.use('/', indexRouter);
 app.use('/check', checkRouter);
@@ -81,7 +94,101 @@ app.use((err, req, res, next) => {
   // Формируем HTML-текст из шаблона "error.hbs" и отправляем его на клиент в качестве ответа.
   res.render('error');
 });
+//  все app - проходят через server  http
+const server = http.createServer(app);
+// clientTracking: false - данные о подключении собираются в Map
+// noServer: true  - запускаем на одном порту серв. раб. на http и wss
+const wss = new WebSocketServer({ clientTracking: false, noServer: true });
+// Part1
+server.on('upgrade', (req, socket, head) => {
+  console.log('Зпауск WS...');
 
-app.listen(PORT, () => {
+  //  провервка наличия сессии, если нужно рассылать всем за закоментить sessionParser
+  sessionParser(req, {}, () => {
+    // console.log('Проверка на наличие сессии, в случае ее отсутствия убивается сокет');
+    // console.log('--->>> значение пришедей сессии', req.session.user);
+    if (!req.session.user) {
+      socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
+      socket.destroy();
+      console.log('Сокет убит!');
+      return;
+    }
+
+    wss.handleUpgrade(req, socket, head, (ws) => {
+      // console.log('Апгрейд соединения http+ws в текущей сессии - ws - ОЧЕНЬ БОЛЬШОЙ ОБЪЕКТ');
+      wss.emit('connection', ws, req);
+    });
+  });
+});
+
+const mapQueue = [];
+
+// Part2
+wss.on('connection', (ws, req) => {
+  // console.log('onConnection', req.session);
+  // console.log('----wss - соединение -----');
+  const id = req.session.user?.id || uuidv4();
+  // console.log('userId ----->>>>>', id);
+  ws.userId = id;
+  // console.log('присваиваем ws.userId = req.session.user.id  =  ', ws.userId);
+  // console.log(' WS уникальный идентификаторо пользователя  = БОЛЬШОЙ ОБЪЕКТ ws');
+  // ws - идентификатор конкретного юзера
+  // map.set(ws);
+  mapQueue.push(ws);
+  // console.log(' загоняем WS пользователя в массив mapQueue - текущее значение = ', mapQueue.length);
+
+  // ws.send(JSON.stringify({ type: 'test', payload: 'ololo' }));
+  // console.log('Отправили текущему ws пользователю  ws.send(JSON.stringify({ type: test, payload: ololo })');
+
+  async function getQueue() {
+    // console.log('13--------------------');
+    const queue = await Queue.findAll(
+      {
+        order: [
+          ['id', 'ASC'],
+        ],
+        include: {
+          model: User,
+          where: { role: 'user' },
+          attributes: { exclude: ['role', 'pass'] },
+        },
+      },
+    );
+    // console.log('11--------------------');
+    const message = { type: 'START', params: { queue } };
+
+    mapQueue.forEach((el) => el.send(JSON.stringify(message)));
+    // console.log('12--------------------');
+    // console.log('map ---->', map);
+    // ws.send(JSON.stringify(message));
+  }
+
+  ws.on('message', (message) => {
+    console.log('message----------->>>', JSON.parse(message));
+    const { type, params } = JSON.parse(message);
+    switch (type) {
+      case 'START':
+        getQueue();
+        // console.log('14--------------------', message);
+        break;
+      default:
+        console.log('error switch onmessage');
+        break;
+    }
+
+    // Here we can now use session parameters.
+    //
+    // console.log('JSON.parse(message)', JSON.parse(message));
+    console.log(`Received message ${message} from user `);
+  });
+
+  ws.on('close', () => {
+    map.delete(id);
+    console.log('15--------------------');
+  });
+});
+
+server.listen(PORT, () => {
+  console.log('000--------------------');
   console.log(`server started PORT: ${PORT}`);
 });

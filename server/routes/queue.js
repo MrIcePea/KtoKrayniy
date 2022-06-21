@@ -14,7 +14,7 @@ router.get('/getqueue', async (req, res) => {
       },
     },
   );
-  console.log(queue);
+  // console.log(queue);
   res.json(queue);
 });
 

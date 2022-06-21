@@ -51,59 +51,6 @@ export default function TopMenu() {
 
           : ''}
       </div>
-
-      {/* <Navbar
-        color="light"
-        expand="md"
-        // dark
-      >
-        <NavbarBrand href="/queue">
-          <img src="/images/logo.jpeg" alt="" width="70px" />
-        </NavbarBrand>
-        <Collapse navbar>
-          <Nav
-            className="me-auto"
-            navbar
-          >
-            {!user.name
-            && (
-            <>
-              <NavItem>
-                <DomLink to="/signin">
-                  Войти
-                </DomLink>
-              </NavItem>
-              <NavItem>
-                <DomLink to="/signup">
-                  Зарегаться
-                </DomLink>
-              </NavItem>
-            </>
-            )}
-            {/* <UncontrolledDropdown
-              inNavbar
-              nav
-            >
-              <DropdownToggle
-                caret
-                nav
-              >
-                Options
-              </DropdownToggle>
-              <DropdownMenu end>
-                <DropdownItem>
-                  Option 1
-                </DropdownItem>
-                <DropdownItem>
-                  Option 2
-                </DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>
-                  Reset
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown> */}
-
     </div>
   );
 }
