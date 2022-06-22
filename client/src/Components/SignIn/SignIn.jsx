@@ -5,6 +5,7 @@ import {
 } from 'reactstrap';
 import { useDispatch } from 'react-redux';
 import { userSignIn } from '../../Redux/Actions/signAction';
+import './Signin.css';
 // import { userSignIn } from '../../Redux/actions/userAction';
 
 export default function SignIn() {
@@ -35,42 +36,44 @@ export default function SignIn() {
   };
 
   return (
-    <Row
-      style={addStyle.input}
-      className="justify-content-center mt-4"
-    >
-      <Col xs={4}>
-        <h3 className="text-center">Авторизация</h3>
-        <Form onSubmit={submitHandler}>
-          <FormGroup>
-            <Input
-              name="nickName"
-              type="text"
-              placeholder="Nick name"
-              value={inputs.nickName || ''}
-              onChange={inputHandler}
-              style={style.input}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Input
-              type="password"
-              name="pass"
-              placeholder="Пароль"
-              value={inputs.pass || ''}
-              onChange={inputHandler}
-              style={style.input}
-            />
-          </FormGroup>
-          <Button
+    <div className="content-wrapper">
+      {/* <Row
+        style={addStyle.input}
+        className="justify-content-center mt-4"
+      > */}
+      {/* <Col> */}
+      <h3 className="text-center">Авторизация</h3>
+      <Form onSubmit={submitHandler}>
+        <FormGroup>
+          <Input
+            name="nickName"
+            type="text"
+            placeholder="Nick name"
+            value={inputs.nickName || ''}
+            onChange={inputHandler}
             style={style.input}
-            block
-          >
-            Войти
+          />
+        </FormGroup>
+        <FormGroup>
+          <Input
+            type="password"
+            name="pass"
+            placeholder="Пароль"
+            value={inputs.pass || ''}
+            onChange={inputHandler}
+            style={style.input}
+          />
+        </FormGroup>
+        <Button
+          style={style.input}
+          block
+        >
+          Войти
 
-          </Button>
-        </Form>
-      </Col>
-    </Row>
+        </Button>
+      </Form>
+      {/* </Col> */}
+      {/* </Row> */}
+    </div>
   );
 }

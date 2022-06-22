@@ -16,9 +16,7 @@ function Queue() {
   const { socket, readyState } = useTodoContext();
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log('useEffect');
     if (!queue.length && readyState === 1) {
-      console.log('!queue.length-------->>>');
       dispatch(wsSendStart(socket));
     }
   }, [readyState]);
