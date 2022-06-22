@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ADD_TO_QUEUE, GET_QUEUE } from '../Types/types';
+import { ADD_TO_QUEUE, GET_QUEUE, EXIT_FROM_QUEUE } from '../Types/types';
 
 export const Queue = (value) => ({
   type: GET_QUEUE,
@@ -19,6 +19,14 @@ export const addToQueue = (value) => {
   console.log('------', value);
   return {
     type: ADD_TO_QUEUE,
+    payload: value,
+  };
+};
+
+export const deleteFromQueue = (value) => {
+  console.log('------', value);
+  return {
+    type: EXIT_FROM_QUEUE,
     payload: value,
   };
 };
