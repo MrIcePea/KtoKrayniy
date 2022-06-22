@@ -33,39 +33,39 @@ function App() {
     <div className="wrapper">
       <TopMenu />
       <div className="main">
-        <Container>
-          {user.isFetch
-            ? <MySpin />
-            : (
-              <Routes>
-                <Route path="/" element={<Main />} />
-                <Route
-                  path="/signin"
-                  element={(
-                    <AuthRouter>
-                      <SignIn />
-                    </AuthRouter>
+        {/* <Container overflow-hidden style={addStyle.input}> */}
+        {user.isFetch
+          ? <MySpin />
+          : (
+            <Routes>
+              <Route path="/" element={<Main />} />
+              <Route
+                path="/signin"
+                element={(
+                  <AuthRouter>
+                    <SignIn />
+                  </AuthRouter>
   )}
-                />
-                <Route
-                  path="/signup"
-                  element={(
-                    <AuthRouter>
-                      <SignUp />
-                    </AuthRouter>
+              />
+              <Route
+                path="/signup"
+                element={(
+                  <AuthRouter>
+                    <SignUp />
+                  </AuthRouter>
   )}
-                />
-                <Route path="/rankings" element={<Rankings />}>
-                  <Route path="/rankings/solo" element={<SoloRankings />} />
-                  <Route path="/rankings/duo" element={<DuoRankings />} />
-                </Route>
-                <Route path="/queue" element={<Queue />} />
-                <Route path="/tournaments" element={<Tournaments />} />
-                <Route path="/tournaments/:id" element={<Tournament />} />
-                <Route path="/tournaments/:id/registration" element={<NewTournament />} />
-              </Routes>
-            )}
-        </Container>
+              />
+              <Route path="/rankings" element={<Rankings />}>
+                <Route path="/rankings/solo" element={<SoloRankings />} />
+                <Route path="/rankings/duo" element={<DuoRankings />} />
+              </Route>
+              <Route path="/queue" element={<Queue />} />
+              <Route path="/tournaments" element={<Tournaments />} />
+              <Route path="/tournaments/:id" element={<Tournament />} />
+              <Route path="/tournaments/:id/registration" element={<NewTournament />} />
+            </Routes>
+          )}
+        {/* </Container> */}
       </div>
       <div className="footer">
         <AuthMenu>

@@ -27,8 +27,17 @@ export default function SignUp() {
     },
   };
 
+  const addStyle = {
+    input: {
+      width: '280px',
+    },
+  };
+
   return (
-    <Row className="justify-content-center mt-4">
+    <Row
+      style={addStyle.input}
+      className="justify-content-center mt-4"
+    >
       <Col xs={4}>
         <h3 className="text-center">Регистрация</h3>
         <Form onSubmit={submitHandler}>
@@ -36,7 +45,7 @@ export default function SignUp() {
             <Input
               name="nickName"
               type="text"
-              placeholder="You name"
+              placeholder="Nick name"
               onChange={inputHandler}
               value={inputs.nickName || ''}
               style={style.input}
@@ -72,7 +81,14 @@ export default function SignUp() {
               style={style.input}
             />
           </FormGroup>
-          <Button block type="submit">Отправить</Button>
+          <Button
+            style={style.input}
+            block
+            type="submit"
+          >
+            Ok
+
+          </Button>
         </Form>
       </Col>
     </Row>

@@ -14,24 +14,24 @@ function SoloRankings() {
   return (
     <div>
       Solo Rankings
-      <Table dark bordered>
+      <Table dark bordered style={{ width: '100%' }}>
         <thead>
-          <tr>
-            <th>Name</th>
-            <th>Rank</th>
-            <th>Won</th>
-            <th>Lost</th>
+          <tr style={{ backgroundColor: '#003686', borderColor: '#FFF' }}>
+            <th style={{ backgroundColor: '#003686', borderColor: '#FFF' }}>Name</th>
+            <th style={{ backgroundColor: '#003686', borderColor: '#FFF' }}>Rank</th>
+            <th style={{ backgroundColor: '#003686', borderColor: '#FFF' }}>Won</th>
+            <th style={{ backgroundColor: '#003686', borderColor: '#FFF' }}>Lost</th>
           </tr>
         </thead>
         <tbody>
           {soloRank.map((el) => {
             if ((el.solowon + el.sololost) > 4 && !el.ban) {
               return (
-                <tr key={el.id}>
-                  <td>{el.nickName}</td>
-                  <td>{el.solorank}</td>
-                  <td>{el.solowon}</td>
-                  <td>{el.sololost}</td>
+                <tr key={el.id} style={{ backgroundColor: '#003686', borderColor: '#FFF' }}>
+                  <td style={{ backgroundColor: '#003686', borderColor: '#FFF' }}>{el.nickName}</td>
+                  <td style={{ backgroundColor: '#003686', borderColor: '#FFF' }}>{el.solorank}</td>
+                  <td style={{ backgroundColor: '#003686', borderColor: '#FFF' }}>{el.solowon}</td>
+                  <td style={{ backgroundColor: '#003686', borderColor: '#FFF' }}>{el.sololost}</td>
                 </tr>
               );
             }

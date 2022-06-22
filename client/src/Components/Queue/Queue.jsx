@@ -32,14 +32,10 @@ function Queue() {
   return (
     <>
       <ChangeModeMenu />
-      <Row>
-        <Col className="centered">
-          <button type="submit" className="winner-btn">Победил</button>
-        </Col>
-        <Col className="centered">
-          <button type="submit" className="winner-btn">Победил</button>
-        </Col>
-      </Row>
+      <div className="winner-btn-wrapper">
+        <button type="submit" className="winner-btn">Победил</button>
+        <button type="submit" className="winner-btn">Победил</button>
+      </div>
       <div className="queue-wrapper">
         <img className="tennis-table-img" src="/images/table-tennis.png" alt="" />
         <div className="gamers-wrapper">
@@ -56,14 +52,10 @@ function Queue() {
             </div>
           </div>
         </div>
-        <Row>
-          <Col className="centered">
-            <button type="submit" className="kick-btn">Не явился</button>
-          </Col>
-          <Col className="centered">
-            <button type="submit" className="kick-btn">Не явился</button>
-          </Col>
-        </Row>
+        <div className="kick-btn-wrapper">
+          <button type="submit" className="kick-btn">Не явился</button>
+          <button type="submit" className="kick-btn">Не явился</button>
+        </div>
         {queue && queue.map((el, index) => {
           if (index === 0 || index === 1) {
             return (
@@ -77,14 +69,10 @@ function Queue() {
           );
         })}
         {queue.find((el) => (user.id === el.User.id)) && (
-        <Row>
-          <Col className="centered">
+          <div className="stay-to-queue-wrapper">
             <button type="submit" className="stay-to-queue-btn">Пропустить очередь</button>
-          </Col>
-          <Col className="centered">
             <button type="submit" className="stay-to-queue-btn">Выйти из очереди</button>
-          </Col>
-        </Row>
+          </div>
         )}
         {!queue.find((el) => (user.id === el.User.id)) && (<button type="submit" className="stay-to-queue-btn" onClick={() => addToQueueHandler(user.id)}>Встать в очередь</button>)}
       </div>

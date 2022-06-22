@@ -28,16 +28,25 @@ export default function SignIn() {
     },
   };
 
+  const addStyle = {
+    input: {
+      width: '280px',
+    },
+  };
+
   return (
-    <Row className="justify-content-center mt-4">
+    <Row
+      style={addStyle.input}
+      className="justify-content-center mt-4"
+    >
       <Col xs={4}>
-        <h3 className="text-center">SignIn</h3>
+        <h3 className="text-center">Авторизация</h3>
         <Form onSubmit={submitHandler}>
           <FormGroup>
             <Input
               name="nickName"
               type="text"
-              placeholder="nickName"
+              placeholder="Nick name"
               value={inputs.nickName || ''}
               onChange={inputHandler}
               style={style.input}
@@ -47,13 +56,19 @@ export default function SignIn() {
             <Input
               type="password"
               name="pass"
-              placeholder="password"
+              placeholder="Пароль"
               value={inputs.pass || ''}
               onChange={inputHandler}
               style={style.input}
             />
           </FormGroup>
-          <Button block>Войти</Button>
+          <Button
+            style={style.input}
+            block
+          >
+            Войти
+
+          </Button>
         </Form>
       </Col>
     </Row>
