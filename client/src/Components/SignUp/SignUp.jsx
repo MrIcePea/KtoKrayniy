@@ -19,6 +19,14 @@ export default function SignUp() {
     setInputs({});
   };
 
+  const style = {
+    input: {
+      borderRadius: 0,
+      width: '180px',
+      maxLength: '12',
+    },
+  };
+
   return (
     <Row className="justify-content-center mt-4">
       <Col xs={4}>
@@ -31,24 +39,27 @@ export default function SignUp() {
               placeholder="You name"
               onChange={inputHandler}
               value={inputs.nickName || ''}
+              style={style.input}
             />
           </FormGroup>
           <FormGroup>
             <Input
               name="firstName"
               type="text"
-              placeholder="You firstName"
+              placeholder="Имя"
               onChange={inputHandler}
               value={inputs.firstName || ''}
+              style={style.input}
             />
           </FormGroup>
           <FormGroup>
             <Input
               name="lastName"
               type="text"
-              placeholder="You lastName"
+              placeholder="Фамилия"
               onChange={inputHandler}
               value={inputs.lastName || ''}
+              style={style.input}
             />
           </FormGroup>
           <FormGroup>
@@ -58,6 +69,7 @@ export default function SignUp() {
               placeholder="password"
               onChange={inputHandler}
               value={inputs.pass || ''}
+              style={style.input}
             />
           </FormGroup>
           <Button block type="submit">Отправить</Button>
