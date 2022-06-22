@@ -2,14 +2,17 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { userLogOut } from '../../Redux/Actions/signAction';
+import { useTodoContext } from '../Context/Contexts';
 import './TopMenu.css';
 
 export default function TopMenu() {
   const { user } = useSelector((state) => state);
+  const { socket } = useTodoContext();
 
   const dispatch = useDispatch();
   const logOutHAndler = () => {
     dispatch(userLogOut());
+    socket.close();
   };
   return (
     <div className="header">

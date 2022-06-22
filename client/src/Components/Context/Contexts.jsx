@@ -35,18 +35,26 @@ export default function TodoContextProvider({ children }) {
     console.log(`Получены данные ${event.data}`);
     console.log('4--------------------');
     const { type, params } = JSON.parse(event.data);
-    const { queue, userInQueue } = params;
+    const { queue } = params;
     switch (type) {
       case 'START':
         dispatch(Queue(queue));
         break;
       case 'ADD_TO_QUEUE':
-
-        dispatch(addToQueue(userInQueue));
+        dispatch(addToQueue(queue));
         break;
       default:
         console.log('error switch context');
         break;
+    }
+  };
+
+
+  socket.onclose = function (event) {
+    if (event.wasClean) {
+      console.log(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
+    } else {
+      console.log('[close] Connection died');
     }
   };
 

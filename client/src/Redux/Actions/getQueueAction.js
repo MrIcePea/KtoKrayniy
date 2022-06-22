@@ -20,6 +20,5 @@ export const addToQueue = (value) => {
   return {
     type: ADD_TO_QUEUE,
     payload: value,
-
   };
 };
