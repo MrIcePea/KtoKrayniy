@@ -17,7 +17,7 @@ async function getQueue(mapQueue) {
   console.log('отправляем данные на ', mapQueue);
   mapQueue.forEach((el) => {
     console.log('---------------------------------------\n', JSON.stringify(message));
-    el.send(JSON.stringify(message))
+    el.send(JSON.stringify(message));
   });
 }
 module.exports = getQueue;
