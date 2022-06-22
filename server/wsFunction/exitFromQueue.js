@@ -1,10 +1,10 @@
 const { Queue, User } = require('../db/models');
-const { ADD_TO_QUEUE } = require('../Types/type_server');
+const { EXIT_FROM_QUEUE } = require('../Types/type_server');
 
-async function addToQueue(mapQueue, params) {
+async function exitFromQueue(mapQueue, params) {
   // console.log('13--------------------');
   const userQueueId = params.id;
-  await Queue.create({ user_id: userQueueId });
+  await Queue.destroy({ where: { user_id: userQueueId } });
   const queue = await Queue.findAll(
     {
       order: [
@@ -18,12 +18,10 @@ async function addToQueue(mapQueue, params) {
     },
   );
 
-  console.log('oтправляем очередь', JSON.parse(JSON.stringify(queue)));
-  const message = { type: ADD_TO_QUEUE, params: { queue } };
+  const message = { type: EXIT_FROM_QUEUE, params: { queue } };
   mapQueue.forEach((el) => {
     console.log('id user которому отправляются данные', el.userId);
     el.send(JSON.stringify(message));
   });
-
 }
-module.exports = addToQueue;
+module.exports = exitFromQueue;

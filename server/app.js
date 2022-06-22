@@ -21,7 +21,10 @@ const queueRouter = require('./routes/queue');
 const tournamentsRouter = require('./routes/tournaments');
 const getQueue = require('./wsFunction/getQueue');
 const addToQueue = require('./wsFunction/addToQueue');
-const { EXIT_FROM_QUEUE, ADD_TO_QUEUE, START } = require('./Types/type_server');
+const {
+  EXIT_FROM_QUEUE, ADD_TO_QUEUE, START, MOVE_DOWN_QUEUE,
+} = require('./Types/type_server');
+const exitFromQueue = require('./wsFunction/exitFromQueue');
 
 const sessionParser = session({
   store: new FileStore({}),
@@ -135,8 +138,11 @@ wss.on('connection', (ws, req) => {
       case ADD_TO_QUEUE:
         await addToQueue(mapQueue, params);
         break;
+      case MOVE_DOWN_QUEUE:
+        await moveDownQueue(mapQueue, params);
+        break;
       case EXIT_FROM_QUEUE:
-        await addToQueue(mapQueue, params);
+        await exitFromQueue(mapQueue, params);
         break;
 
       default:
