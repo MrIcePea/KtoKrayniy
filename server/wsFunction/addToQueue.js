@@ -1,4 +1,5 @@
 const { Queue, User } = require('../db/models');
+const { ADD_TO_QUEUE } = require('../Types/type_server');
 
 async function addToQueue(mapQueue, params) {
   // console.log('13--------------------');
@@ -14,7 +15,7 @@ async function addToQueue(mapQueue, params) {
       },
     },
   );
-  const message = { type: 'ADD_TO_QUEUE', params: { userInQueue } };
+  const message = { type: ADD_TO_QUEUE, params: { userInQueue } };
   mapQueue.forEach((el) => el.send(JSON.stringify(message)));
 }
 module.exports = addToQueue;
