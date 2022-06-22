@@ -81,6 +81,10 @@
   border: 0;
 }
 
+.winner-btn:hover {
+  background-color: #31353b;
+}
+
 .kick-btn {
   background-color: #d34547;
   width: 130px;
