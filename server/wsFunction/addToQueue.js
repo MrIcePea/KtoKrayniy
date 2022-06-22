@@ -5,9 +5,11 @@ async function addToQueue(mapQueue, params) {
   // console.log('13--------------------');
   const userQueueId = params.id;
   await Queue.create({ user_id: userQueueId });
-  const userInQueue = await Queue.findOne(
+  const queue = await Queue.findAll(
     {
-      where: { user_id: userQueueId },
+      order: [
+        ['id', 'ASC'],
+      ],
       include: {
         model: User,
         where: { role: 'user' },
@@ -15,7 +17,13 @@ async function addToQueue(mapQueue, params) {
       },
     },
   );
-  const message = { type: ADD_TO_QUEUE, params: { userInQueue } };
-  mapQueue.forEach((el) => el.send(JSON.stringify(message)));
+
+  console.log('oтправляем очередь', JSON.parse(JSON.stringify(queue)));
+  const message = { type: 'ADD_TO_QUEUE', params: { queue } };
+  mapQueue.forEach((el) => {
+    console.log('id user которому отправляются данные', el.userId);
+    el.send(JSON.stringify(message));
+  });
+
 }
 module.exports = addToQueue;

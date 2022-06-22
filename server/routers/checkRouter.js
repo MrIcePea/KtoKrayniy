@@ -12,7 +12,7 @@ router.route('/signout')
   .get((req, res) => {
     console.log('<<----- GET запрос на уничт сессии и чистку КУКов');
     req.session.destroy();
-    res.clearCookie('sid').sendStatus(200);
+    res.clearCookie('sID').sendStatus(200);
   });
 
 router.route('/signin')

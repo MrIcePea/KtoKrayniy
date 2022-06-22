@@ -89,7 +89,7 @@ const server = http.createServer(app);
 // noServer: true  - запускаем на одном порту серв. раб. на http и wss
 const wss = new WebSocketServer({ clientTracking: false, noServer: true });
 // Part1
-const mapQueue = [];
+let mapQueue = [];
 
 server.on('upgrade', (req, socket, head) => {
   console.log('Зпауск WS...');
@@ -120,7 +120,7 @@ wss.on('connection', (ws, req) => {
   ws.userId = id;
 
   const findeUserId = mapQueue.map((el) => el.userId);
-  console.log(findeUserId);
+  console.log('------>', findeUserId);
   if (true) mapQueue.push(ws);
   // if (!findeUserId.includes(ws.userId)) mapQueue.push(ws);
   console.log('Колличество залогиненных пользователей = ', mapQueue.length);
@@ -148,6 +148,7 @@ wss.on('connection', (ws, req) => {
   ws.on('close', () => {
     console.log('map.delete(id)-------id= ', id);
     console.log('mapQueue.length-------id= ', mapQueue.length);
+    mapQueue = mapQueue.filter((el) => (el !== ws));
   });
 });
 

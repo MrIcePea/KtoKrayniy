@@ -7,9 +7,8 @@ const getQueueReducer = (state = [], action) => {
       return payload;
 
     case ADD_TO_QUEUE:
-      state.push(payload);
       console.log('мы запушили юзера в редакс', state);
-      return state;
+      return payload;
 
     default:
       return state;
