@@ -21,12 +21,13 @@ const queueRouter = require('./routes/queue');
 const tournamentsRouter = require('./routes/tournaments');
 const getQueue = require('./wsFunction/getQueue');
 const addToQueue = require('./wsFunction/addToQueue');
+const { EXIT_FROM_QUEUE, ADD_TO_QUEUE, START } = require('./Types/type_server');
 
 const sessionParser = session({
   store: new FileStore({}),
   name: 'sID',
   secret: 'user',
-  resave: false,
+  resave: true,
   saveUninitialized: false,
   cookie: {
     expires: 24 * 60 * 60e3,
@@ -128,14 +129,16 @@ wss.on('connection', (ws, req) => {
     console.log('message----------123->>>', JSON.parse(message));
     const { type, params } = JSON.parse(message);
     switch (type) {
-      case 'START':
+      case START:
         await getQueue(mapQueue);
-        console.log('14--------------------', message);
         break;
-      case 'ADD_TO_QUEUE':
+      case ADD_TO_QUEUE:
         await addToQueue(mapQueue, params);
-        console.log('15--------------------', message);
         break;
+      case EXIT_FROM_QUEUE:
+        await addToQueue(mapQueue, params);
+        break;
+
       default:
         console.log('error switch onmessage');
         break;
