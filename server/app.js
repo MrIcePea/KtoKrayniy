@@ -37,20 +37,6 @@ const { PORT } = process.env;
 
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
-// app.all('/', (req, res, next) => {
-// const arr = ['http://192.168.1.98:3000', 'http://192.168.1.99:3000'];
-// const { origin } = req.headers;
-// if (arr.includes(origin)) {
-//   res.header('Access-Control-Allow-Origin', origin);
-// }
-// res.header('Access-Control-Allow-Origin', '*');
-// // res.header('Access-Control-Allow-Headers', 'X-Requested-With');
-// // res.header('Access-Control-Allow-Origin', 'http://localhost:3001');
-// res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, authorization');
-// res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,PUT,OPTIONS');
-// next();
-// });
-// app.use(cors());
 app.use(cors({ credentials: true, origin: true }));
 app.use(logger('dev'));
 // app.use(express.static(path.join(__dirname, 'public')));
@@ -134,7 +120,8 @@ wss.on('connection', (ws, req) => {
   // console.log(' WS уникальный идентификаторо пользователя  = БОЛЬШОЙ ОБЪЕКТ ws');
   // ws - идентификатор конкретного юзера
   // map.set(ws);
-  mapQueue.push(ws);
+  if (!mapQueue.includes(ws)) mapQueue.push(ws);
+  console.log('Колличество залогиненных пользователей = ', ws);
   // console.log(' загоняем WS пользователя в массив mapQueue - текущее значение = ', mapQueue.length);
 
   // ws.send(JSON.stringify({ type: 'test', payload: 'ololo' }));
