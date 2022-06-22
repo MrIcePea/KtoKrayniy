@@ -26,10 +26,10 @@ function Tournament() {
       </ul>
       {tournament.map((el, index) => (
         <div className="tabs__block" id={`tab-${index}`}>
-          <Table dark bordered style={{ width: '320px' }}>
+          <Table dark bordered style={{ width: '100%' }}>
             <thead>
               <tr style={{ backgroundColor: '#003686', borderColor: '#FFF' }}>
-                <th style={{ backgroundColor: '#003686', borderColor: '#FFF', width: '160px' }}>Game</th>
+                <th style={{ backgroundColor: '#003686', borderColor: '#FFF' }}>Game</th>
               </tr>
             </thead>
             <tbody>

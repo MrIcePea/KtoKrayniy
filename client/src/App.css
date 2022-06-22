@@ -5,15 +5,16 @@
 }
 .wrapper {
   min-height: 100vh;
+  width: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .main {
+  width: auto;
   flex: 1 1 auto;
 }
 
 .footer {
-  width: auto;
+  width: 100%;
 }

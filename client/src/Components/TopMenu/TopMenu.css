@@ -19,17 +19,21 @@
 
 .header {
   margin-top: 5px;
-  min-width: 320px;
+  /* margin-left: 5px; */
+  width: 100%;
   display: flex;
+  justify-content: space-between;
 }
 
 .logo-wrapper {
   width: 70px;
+  margin-left: 20px;
 }
 
 .logout-btn {
-  width: 120px;
+  width: 100px;
   height: 30px;
+  margin-right: 20px;
   font-size: 12px;
   background-color: #003686;
   color: white;
@@ -44,13 +48,13 @@
   width: auto;
   display: flex;
   flex-direction: row;
+  justify-content: flex-end;
 }
 
 .menu-item-wrapper {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
 }
 
 .topmenu-wrapper-text {
@@ -63,8 +67,10 @@
 
 .auth-menu-wrapper {
   display: flex;
+  align-items: center;
 }
 
 .auth-menu-item-wrapper {
+  display: flex;
   margin: 0px 5px;
 }

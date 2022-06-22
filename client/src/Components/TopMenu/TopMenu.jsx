@@ -14,7 +14,7 @@ export default function TopMenu() {
   return (
     <div className="header">
       <div className="logo-wrapper">
-        <Link to="/queue"><img src="/images/logo.svg" alt="" width="70px" /></Link>
+        <Link to="/queue"><img src="/images/logo.svg" alt="" /></Link>
       </div>
       <div className="menu-item-wrapper">
         {!user.name
@@ -37,12 +37,12 @@ export default function TopMenu() {
         {user.name
           ? (
             <div className="topmenu-wrapper">
-              <div className="topmenu-wrapper-text">
+              {/* <div className="topmenu-wrapper-text">
                 <p>
                   Привет,
                   {user.name}
                 </p>
-              </div>
+              </div> */}
               <div className="topmenu-wrapper-btn">
                 <button type="submit" className="logout-btn" onClick={logOutHAndler}>Выйти</button>
               </div>

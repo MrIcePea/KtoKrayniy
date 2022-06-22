@@ -4,25 +4,27 @@ import './Queue.css';
 
 function ChangeModeMenu() {
   return (
-    <ul>
+    <div className="change-mode-wrapper">
+
       <div className="menu-wrapper">
         <div className="menu-item-wrapper">
-          <li>
-            <Link to="/queue/1v1"><button type="submit" className="change-game-type-btn">1 vs 1</button></Link>
-          </li>
+
+          <Link to="/queue/1v1"><button type="submit" className="change-game-type-btn">1 vs 1</button></Link>
+
         </div>
         <div className="menu-item-wrapper">
-          <li>
-            <Link to="/queue/2v2"><button type="submit" className="change-game-type-btn">2 vs 2</button></Link>
-          </li>
+
+          <Link to="/queue/2v2"><button type="submit" className="change-game-type-btn">2 vs 2</button></Link>
+
         </div>
         <div className="menu-item-wrapper">
-          <li>
-            <Link to="/queue/circle"><button type="submit" className="change-game-type-btn">Круговая</button></Link>
-          </li>
+
+          <Link to="/queue/circle"><button type="submit" className="change-game-type-btn">Круговая</button></Link>
+
         </div>
       </div>
-    </ul>
+
+    </div>
   );
 }
 
