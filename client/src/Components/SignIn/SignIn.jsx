@@ -20,6 +20,14 @@ export default function SignIn() {
     setInputs({});
   };
 
+  const style = {
+    input: {
+      borderRadius: 0,
+      width: '180px',
+      maxLength: '12',
+    },
+  };
+
   return (
     <Row className="justify-content-center mt-4">
       <Col xs={4}>
@@ -32,6 +40,7 @@ export default function SignIn() {
               placeholder="nickName"
               value={inputs.nickName || ''}
               onChange={inputHandler}
+              style={style.input}
             />
           </FormGroup>
           <FormGroup>
@@ -41,6 +50,7 @@ export default function SignIn() {
               placeholder="password"
               value={inputs.pass || ''}
               onChange={inputHandler}
+              style={style.input}
             />
           </FormGroup>
           <Button block>Войти</Button>

@@ -8,7 +8,7 @@ export const RegistrationList = (value) => ({
 
 export const getRegistrationList1v1 = (id) => async (dispatch) => {
   try {
-    const response = await axios({ url: `tournaments/${id}/registration`, baseURL: 'http://localhost:3001/' });
+    const response = await axios({ url: `tournaments/${id}/registration` });
     dispatch(RegistrationList(response.data));
   } catch (err) {
     console.log(err);
@@ -17,7 +17,7 @@ export const getRegistrationList1v1 = (id) => async (dispatch) => {
 
 export const getRegistrationList2v2 = (id) => async (dispatch) => {
   try {
-    const response = await axios({ url: `tournaments/${id}/registration`, baseURL: 'http://localhost:3001/' });
+    const response = await axios({ url: `tournaments/${id}/registration` });
     dispatch(RegistrationList(response.data));
   } catch (err) {
     console.log(err);
