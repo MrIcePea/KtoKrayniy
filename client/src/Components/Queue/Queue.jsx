@@ -6,7 +6,7 @@ import {
 } from 'reactstrap';
 
 import { getQueue } from '../../Redux/Actions/getQueueAction';
-import { wsSendStart } from '../../Redux/Actions/wsAction';
+import { wsAddToQueue, wsSendStart } from '../../Redux/Actions/wsAction';
 import { useTodoContext } from '../Context/Contexts';
 import ChangeModeMenu from './ChangeModeMenu';
 
@@ -28,7 +28,7 @@ function Queue() {
 
   const addToQueueHandler = (id) => {
     console.log('button pressed');
-    dispatch(wsSendStart(socket, id));
+    dispatch(wsAddToQueue(socket, id));
   };
 
 

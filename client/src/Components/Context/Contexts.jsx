@@ -3,7 +3,7 @@ import {
 } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { Queue } from '../../Redux/Actions/getQueueAction';
+import { addToQueue, Queue } from '../../Redux/Actions/getQueueAction';
 
 const TodoContext = createContext();
 console.log(process.env.REACT_APP_WS_URL);
@@ -34,9 +34,10 @@ export default function TodoContextProvider({ children }) {
     switch (type) {
       case 'START':
         dispatch(Queue(queue));
-        console.log('5--------------------');
         break;
-
+      case 'ADD_TO_QUEUE':
+        dispatch(addToQueue(id));
+        break;
       default:
         console.log('error switch context');
         break;

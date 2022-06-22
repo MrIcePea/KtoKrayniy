@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_QUEUE } from '../Types/types';
+import { ADD_TO_QUEUE, GET_QUEUE } from '../Types/types';
 
 export const Queue = (value) => ({
   type: GET_QUEUE,
@@ -14,3 +14,8 @@ export const getQueue = () => async (dispatch) => {
     console.log(err);
   }
 };
+
+export const addToQueue = (value) => ({
+  type: ADD_TO_QUEUE,
+  payload: value,
+});
