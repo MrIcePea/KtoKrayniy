@@ -5,6 +5,7 @@
 
 .tabs__block {
   display: none;
+  width: 100%;
 }
 
 .tabs__block:target {
@@ -58,10 +59,6 @@
   color: white;
 }
 
-.tournament-wrapper {
-  margin: 20px 10px;
-  max-width: 320px;
-}
 
 .addtournament-wrapper {
   margin: 20px 20px;
@@ -75,21 +72,21 @@
 .tournament-name-wrapper {
   display: flex;
   flex-direction: column;
-  max-width: 320px;
+  width: 100%;
   margin-bottom: 10px;
 }
 
 .tournament-select-wrapper {
   display: flex;
   flex-direction: column;
-  max-width: 320px;
+  width: 100%;
   margin-bottom: 10px;
 }
 
 .tournament-start-wrapper {
   display: flex;
   flex-direction: column;
-  max-width: 320px;
+  width: 100%;
   margin-bottom: 10px;
 }
 
@@ -153,3 +150,16 @@
   color: white;
   border: 0;
 }
+
+.nav-tabs-wrapper {
+  width: 100%;
+}
+
+.tournament-wrapper {
+  display: flex;
+  margin: 20px 0px;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+

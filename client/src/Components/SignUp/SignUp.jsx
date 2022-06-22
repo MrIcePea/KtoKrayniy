@@ -47,6 +47,7 @@ export default function SignUp() {
           <Input
             name="nickName"
             type="text"
+            maxlength="12"
             placeholder="Nick name"
             onChange={inputHandler}
             value={inputs.nickName || ''}
