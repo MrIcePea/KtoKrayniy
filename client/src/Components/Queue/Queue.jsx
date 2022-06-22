@@ -6,7 +6,7 @@ import {
 } from 'reactstrap';
 
 import { getQueue } from '../../Redux/Actions/getQueueAction';
-import { wsAddToQueue, wsSendStart } from '../../Redux/Actions/wsAction';
+import { wsAddToQueue, wsExitFromQueue, wsSendStart } from '../../Redux/Actions/wsAction';
 import { useTodoContext } from '../Context/Contexts';
 import ChangeModeMenu from './ChangeModeMenu';
 
@@ -24,6 +24,11 @@ function Queue() {
   const addToQueueHandler = (id) => {
     console.log('button pressed');
     dispatch(wsAddToQueue(socket, id));
+  };
+
+  const exitQueueHandler = (id) => {
+    console.log('exit button pressed');
+    dispatch(wsExitFromQueue(socket, id));
   };
 
 
@@ -69,7 +74,7 @@ function Queue() {
         {queue.find((el) => (user.id === el.User.id)) && (
           <div className="stay-to-queue-wrapper">
             <button type="submit" className="stay-to-queue-btn">Пропустить очередь</button>
-            <button type="submit" className="stay-to-queue-btn">Выйти из очереди</button>
+            <button type="submit" className="stay-to-queue-btn" onClick={() => exitQueueHandler(user.id)}>Выйти из очереди</button>
           </div>
         )}
         {!queue.find((el) => (user.id === el.User.id)) && (<button type="submit" className="stay-to-queue-btn" onClick={() => addToQueueHandler(user.id)}>Встать в очередь</button>)}
