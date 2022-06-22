@@ -19,6 +19,8 @@ const { Queue, User } = require('./db/models');
 const usersRouter = require('./routes/users');
 const queueRouter = require('./routes/queue');
 const tournamentsRouter = require('./routes/tournaments');
+const getQueue = require('./wsFunction/getQueue');
+const addToQueue = require('./wsFunction/addToQueue');
 
 const sessionParser = session({
   store: new FileStore({}),
@@ -32,7 +34,7 @@ const sessionParser = session({
   },
 });
 const app = express();
-const map = new Map();
+// const map = new Map();
 const { PORT } = process.env;
 
 app.set('view engine', 'hbs');
@@ -112,92 +114,35 @@ server.on('upgrade', (req, socket, head) => {
 
 // Part2
 wss.on('connection', (ws, req) => {
-  // console.log('onConnection', req.session);
-  // console.log('----wss - соединение -----');
   const id = req.session.user?.id || uuidv4();
-  // console.log('userId ----->>>>>', id);
+
   ws.userId = id;
 
-  // console.log('присваиваем ws.userId = req.session.user.id  =  ', ws.userId);
-  // console.log(' WS уникальный идентификаторо пользователя  = БОЛЬШОЙ ОБЪЕКТ ws');
-  // ws - идентификатор конкретного юзера
-  // map.set(ws);
   const findeUserId = mapQueue.map((el) => el.userId);
   console.log(findeUserId);
-  if (!findeUserId.includes(ws.userId)) mapQueue.push(ws);
+  if (true) mapQueue.push(ws);
+  // if (!findeUserId.includes(ws.userId)) mapQueue.push(ws);
   console.log('Колличество залогиненных пользователей = ', mapQueue.length);
-  // console.log(' загоняем WS пользователя в массив mapQueue - текущее значение = ', mapQueue.length);
 
-  // ws.send(JSON.stringify({ type: 'test', payload: 'ololo' }));
-  // console.log('Отправили текущему ws пользователю  ws.send(JSON.stringify({ type: test, payload: ololo })');
-
-  async function getQueue() {
-    // console.log('13--------------------');
-    const queue = await Queue.findAll(
-      {
-        order: [
-          ['id', 'ASC'],
-        ],
-        include: {
-          model: User,
-          where: { role: 'user' },
-          attributes: { exclude: ['role', 'pass'] },
-        },
-      },
-    );
-    // console.log('11--------------------');
-    const message = { type: 'START', params: { queue } };
-
-    mapQueue.forEach((el) => el.send(JSON.stringify(message)));
-    // console.log('12--------------------');
-    // console.log('map ---->', map);
-    // ws.send(JSON.stringify(message));
-  }
-
-  async function addToQueue(params) {
-    // console.log('13--------------------');
-    const userQueueId = params.id;
-    await Queue.create({ user_id: userQueueId });
-    const userInQueue = await Queue.findOne(
-      {
-        where: { user_id: userQueueId },
-        include: {
-          model: User,
-          where: { role: 'user' },
-          attributes: { exclude: ['role', 'pass'] },
-        },
-      },
-    );
-    const message = { type: 'ADD_TO_QUEUE', params: { userInQueue } };
-    mapQueue.forEach((el) => el.send(JSON.stringify(message)));
-  }
-
-  ws.on('message', (message) => {
-    console.log('message----------->>>', JSON.parse(message));
+  ws.on('message', async (message) => {
+    console.log('message----------123->>>', JSON.parse(message));
     const { type, params } = JSON.parse(message);
     switch (type) {
       case 'START':
-        getQueue();
-        // console.log('14--------------------', message);
+        await getQueue(mapQueue);
+        console.log('14--------------------', message);
         break;
       case 'ADD_TO_QUEUE':
-        addToQueue(params);
-        // console.log('14--------------------', message);
+        await addToQueue(mapQueue, params);
+        console.log('15--------------------', message);
         break;
       default:
         console.log('error switch onmessage');
         break;
     }
-
-    // Here we can now use session parameters.
-    //
-    // console.log('JSON.parse(message)', JSON.parse(message));
-    // console.log(`Received message ${message} from user `);
   });
 
   ws.on('close', () => {
-    // if (id) { mapQueue.splice(mapQueue.indexOf(id), 1); }
-    // map.delete(id);
     console.log('map.delete(id)-------id= ', id);
     console.log('mapQueue.length-------id= ', mapQueue.length);
   });
