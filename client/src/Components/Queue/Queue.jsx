@@ -13,18 +13,15 @@ import ChangeModeMenu from './ChangeModeMenu';
 
 function Queue() {
   const { queue, user } = useSelector((state) => state);
-  const { socket } = useTodoContext();
-  console.log('---<<<none', socket);
-  // const socket = new WebSocket('ws://localhost:3001');
-
-
+  const { socket, readyState } = useTodoContext();
   const dispatch = useDispatch();
   useEffect(() => {
-    if (!queue.length) {
+    console.log('useEffect');
+    if (!queue.length && readyState === 1) {
       console.log('!queue.length-------->>>');
       dispatch(wsSendStart(socket));
     }
-  }, []);
+  }, [readyState]);
 
   const addToQueueHandler = (id) => {
     console.log('button pressed');

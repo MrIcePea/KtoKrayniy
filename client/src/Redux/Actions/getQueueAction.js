@@ -15,7 +15,11 @@ export const getQueue = () => async (dispatch) => {
   }
 };
 
-export const addToQueue = (value) => ({
-  type: ADD_TO_QUEUE,
-  payload: value,
-});
+export const addToQueue = (value) => {
+  console.log('------', value);
+  return {
+    type: ADD_TO_QUEUE,
+    payload: value,
+
+  };
+};
