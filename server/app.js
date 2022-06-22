@@ -86,6 +86,8 @@ const server = http.createServer(app);
 // noServer: true  - запускаем на одном порту серв. раб. на http и wss
 const wss = new WebSocketServer({ clientTracking: false, noServer: true });
 // Part1
+const mapQueue = [];
+
 server.on('upgrade', (req, socket, head) => {
   console.log('Зпауск WS...');
 
@@ -94,6 +96,7 @@ server.on('upgrade', (req, socket, head) => {
     // console.log('Проверка на наличие сессии, в случае ее отсутствия убивается сокет');
     // console.log('--->>> значение пришедей сессии', req.session.user);
     if (!req.session.user) {
+      // if (req.session.user.id) { mapQueue.splice(mapQueue.indexOf(req.session.user.id), 1); }
       socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
       socket.destroy();
       console.log('Сокет убит!');
@@ -107,8 +110,6 @@ server.on('upgrade', (req, socket, head) => {
   });
 });
 
-const mapQueue = [];
-
 // Part2
 wss.on('connection', (ws, req) => {
   // console.log('onConnection', req.session);
@@ -116,12 +117,15 @@ wss.on('connection', (ws, req) => {
   const id = req.session.user?.id || uuidv4();
   // console.log('userId ----->>>>>', id);
   ws.userId = id;
+
   // console.log('присваиваем ws.userId = req.session.user.id  =  ', ws.userId);
   // console.log(' WS уникальный идентификаторо пользователя  = БОЛЬШОЙ ОБЪЕКТ ws');
   // ws - идентификатор конкретного юзера
   // map.set(ws);
-  if (!mapQueue.includes(ws)) mapQueue.push(ws);
-  console.log('Колличество залогиненных пользователей = ', ws);
+  const findeUserId = mapQueue.map((el) => el.userId);
+  console.log(findeUserId);
+  if (!findeUserId.includes(ws.userId)) mapQueue.push(ws);
+  console.log('Колличество залогиненных пользователей = ', mapQueue.length);
   // console.log(' загоняем WS пользователя в массив mapQueue - текущее значение = ', mapQueue.length);
 
   // ws.send(JSON.stringify({ type: 'test', payload: 'ololo' }));
@@ -166,12 +170,14 @@ wss.on('connection', (ws, req) => {
     // Here we can now use session parameters.
     //
     // console.log('JSON.parse(message)', JSON.parse(message));
-    console.log(`Received message ${message} from user `);
+    // console.log(`Received message ${message} from user `);
   });
 
   ws.on('close', () => {
-    map.delete(id);
-    console.log('15--------------------');
+    // if (id) { mapQueue.splice(mapQueue.indexOf(id), 1); }
+    // map.delete(id);
+    console.log('map.delete(id)-------id= ', id);
+    console.log('mapQueue.length-------id= ', mapQueue.length);
   });
 });
 
