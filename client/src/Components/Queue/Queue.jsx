@@ -25,11 +25,12 @@ function Queue() {
       dispatch(wsSendStart(socket));
     }
   }, []);
-  const addQueHandler = (e) => {
-    e.preventDefault();
-    // dispatch(userSignIn(inputs));
-    // setInputs({});
+
+  const addToQueueHandler = (id) => {
+    console.log('button pressed');
+    dispatch(wsSendStart(socket, id));
   };
+
 
   return (
     <>
@@ -88,7 +89,7 @@ function Queue() {
           </Col>
         </Row>
         )}
-        {!queue.find((el) => (user.id === el.User.id)) && (<button type="submit" className="stay-to-queue-btn">Встать в очередь</button>)}
+        {!queue.find((el) => (user.id === el.User.id)) && (<button type="submit" className="stay-to-queue-btn" onClick={() => addToQueueHandler(user.id)}>Встать в очередь</button>)}
       </div>
     </>
   );
