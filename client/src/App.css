@@ -12,9 +12,16 @@
 
 .main {
   width: auto;
+  margin-top: 70px;
+  margin-bottom: 70px;
   flex: 1 1 auto;
 }
 
+
 .footer {
+  background-color: white;
   width: 100%;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
 }

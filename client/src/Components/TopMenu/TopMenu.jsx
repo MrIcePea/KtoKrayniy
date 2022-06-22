@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { userLogOut } from '../../Redux/Actions/signAction';
 import { useTodoContext } from '../Context/Contexts';
 import './TopMenu.css';
@@ -8,9 +8,9 @@ import './TopMenu.css';
 export default function TopMenu() {
   const { user } = useSelector((state) => state);
   const { socket } = useTodoContext();
-
   const dispatch = useDispatch();
-  const logOutHAndler = () => {
+  const logOutHAndler = (e) => {
+    // e.preventDefault();
     dispatch(userLogOut());
     socket.close();
   };
@@ -47,7 +47,7 @@ export default function TopMenu() {
                 </p>
               </div> */}
               <div className="topmenu-wrapper-btn">
-                <button type="submit" className="logout-btn" onClick={logOutHAndler}>Выйти</button>
+                <Link to="/signin"><button type="submit" className="logout-btn" onClick={logOutHAndler}>Выйти</button></Link>
               </div>
             </div>
           )
