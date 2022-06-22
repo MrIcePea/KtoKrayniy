@@ -8,6 +8,7 @@ const ADD_USER_TO_TOURNAMENT = 'ADD_USER_TO_TOURNAMENT';
 const ADD_TO_QUEUE = 'ADD_TO_QUEUE';
 const EXIT_FROM_QUEUE = 'EXIT_FROM_QUEUE';
 const START = 'START';
+const MOVE_DOWN_QUEUE = 'MOVE_DOWN_QUEUE',
 
 module.exports = {
   GET_SOLO_RANKS,
@@ -20,4 +21,5 @@ module.exports = {
   ADD_TO_QUEUE,
   EXIT_FROM_QUEUE,
   START,
+  MOVE_DOWN_QUEUE,
 };
