@@ -154,12 +154,34 @@ wss.on('connection', (ws, req) => {
     // ws.send(JSON.stringify(message));
   }
 
+  async function addToQueue(params) {
+    // console.log('13--------------------');
+    const userQueueId = params.id;
+    await Queue.create({ user_id: userQueueId });
+    const userInQueue = await Queue.findOne(
+      {
+        where: { user_id: userQueueId },
+        include: {
+          model: User,
+          where: { role: 'user' },
+          attributes: { exclude: ['role', 'pass'] },
+        },
+      },
+    );
+    const message = { type: 'ADD_TO_QUEUE', params: { userInQueue } };
+    mapQueue.forEach((el) => el.send(JSON.stringify(message)));
+  }
+
   ws.on('message', (message) => {
     console.log('message----------->>>', JSON.parse(message));
     const { type, params } = JSON.parse(message);
     switch (type) {
       case 'START':
         getQueue();
+        // console.log('14--------------------', message);
+        break;
+      case 'ADD_TO_QUEUE':
+        addToQueue(params);
         // console.log('14--------------------', message);
         break;
       default:
