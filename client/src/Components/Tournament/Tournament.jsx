@@ -14,16 +14,18 @@ function Tournament() {
   }, [id]);
   /*   const players = tournament.players.map((el) => return ) */
   return (
-    <div>
-      <ul className="nav nav-tabs tabs__items">
-        {tournament.map((el, index) => (
-          <div key={index}>
-            <li className="nav-item">
-              <a className="nav-link tabs__item" href={`#tab-${index}`}>{el.round}</a>
-            </li>
-          </div>
-        ))}
-      </ul>
+    <div className="tournament-wrapper">
+      <div className="nav-tabs-wrapper">
+        <ul className="nav nav-tabs tabs__items">
+          {tournament.map((el, index) => (
+            <div key={index}>
+              <li className="nav-item">
+                <a className="nav-link tabs__item" href={`#tab-${index}`}>{el.round}</a>
+              </li>
+            </div>
+          ))}
+        </ul>
+      </div>
       {tournament.map((el, index) => (
         <div className="tabs__block" id={`tab-${index}`}>
           <Table dark bordered style={{ width: '100%' }}>

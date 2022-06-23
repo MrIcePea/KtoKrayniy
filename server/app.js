@@ -22,9 +22,11 @@ const tournamentsRouter = require('./routes/tournaments');
 const getQueue = require('./wsFunction/getQueue');
 const addToQueue = require('./wsFunction/addToQueue');
 const {
-  EXIT_FROM_QUEUE, ADD_TO_QUEUE, START, MOVE_DOWN_QUEUE,
+  EXIT_FROM_QUEUE, ADD_TO_QUEUE, START, MOVE_DOWN_QUEUE, WIN,
 } = require('./Types/type_server');
 const exitFromQueue = require('./wsFunction/exitFromQueue');
+const moveDownQueue = require('./wsFunction/moveDownQueue');
+const win = require('./wsFunction/win');
 
 const sessionParser = session({
   store: new FileStore({}),
@@ -144,7 +146,9 @@ wss.on('connection', (ws, req) => {
       case EXIT_FROM_QUEUE:
         await exitFromQueue(mapQueue, params);
         break;
-
+      case WIN:
+        await win(mapQueue, params);
+        break;
       default:
         console.log('error switch onmessage');
         break;

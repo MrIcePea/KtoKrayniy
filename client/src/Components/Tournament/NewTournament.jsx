@@ -19,13 +19,13 @@ function NewTournament() {
     });
   }, []);
   function handleClick() {
-    dispatch(addUserToTournament(id, user));
+    dispatch(addUserToTournament(id, user.id, tournaments[0].mode));
   }
   return (
     <div>
       <h2>Новый турнир</h2>
       <h4>1:32:27</h4>
-      <button type="submit" onClick={() => console.log(user)}>click</button>
+      <button type="submit" onClick={() => console.log(user.id)}>click</button>
       <button type="submit" onClick={handleClick}>Участвовать</button>
 
     </div>
