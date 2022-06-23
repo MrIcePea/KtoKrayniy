@@ -10,3 +10,6 @@ export const EXIT_FROM_QUEUE = 'EXIT_FROM_QUEUE';
 export const MOVE_DOWN_QUEUE = 'MOVE_DOWN_QUEUE';
 export const START = 'START';
 export const WIN = 'WIN';
+export const CHANGE_MODE = 'CHANGE_MODE';
+export const GET_MODE = 'GET_MODE';
+

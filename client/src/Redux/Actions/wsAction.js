@@ -1,5 +1,5 @@
 import {
-  ADD_TO_QUEUE, EXIT_FROM_QUEUE, MOVE_DOWN_QUEUE, WIN,
+  ADD_TO_QUEUE, CHANGE_MODE, EXIT_FROM_QUEUE, MOVE_DOWN_QUEUE, WIN,
 } from '../Types/types';
 
 export const wsSendStart = (ws) => async (dispatch) => {
@@ -26,3 +26,9 @@ export const wsWin = (ws, winnerId, loserId) => async (dispatch) => {
   console.log('wsWin----------->>', 'winner_id:', winnerId, 'loser_id:', loserId, 'ws:', ws);
   ws.send(JSON.stringify({ type: WIN, params: { winnerId, loserId } }));
 };
+
+export const wsChangeMode = (ws, mode) => async (dispatch) => {
+  console.log('wsChangeMode----------->>', 'mode:', mode, 'ws:', ws);
+  ws.send(JSON.stringify({ type: CHANGE_MODE, params: { mode } }));
+};
+

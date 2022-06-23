@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {
-  ADD_TO_QUEUE, GET_QUEUE, EXIT_FROM_QUEUE, MOVE_DOWN_QUEUE, WIN,
+  ADD_TO_QUEUE, GET_QUEUE, EXIT_FROM_QUEUE, MOVE_DOWN_QUEUE, WIN, CHANGE_MODE, GET_MODE,
 } from '../Types/types';
 
 export const Queue = (value) => ({
@@ -8,10 +8,24 @@ export const Queue = (value) => ({
   payload: value,
 });
 
+export const Mode = (value) => ({
+  type: GET_MODE,
+  payload: value,
+});
+
 export const getQueue = () => async (dispatch) => {
   try {
     const response = await axios({ url: 'queue/getqueue' });
     dispatch(Queue(response.data));
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getMode = () => async (dispatch) => {
+  try {
+    const response = await axios({ url: 'queue/getmode' });
+    dispatch(Mode(response.data));
   } catch (err) {
     console.log(err);
   }
@@ -45,6 +59,14 @@ export const win = (value) => {
   console.log('------', value);
   return {
     type: WIN,
+    payload: value,
+  };
+};
+
+export const changeMode = (value) => {
+  console.log('------', value);
+  return {
+    type: CHANGE_MODE,
     payload: value,
   };
 };
