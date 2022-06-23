@@ -1,8 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  wsAddToQueue, wsExitFromQueue, wsMoveDownQueue, wsWin,
-} from '../../Redux/Actions/wsAction';
 import { useTodoContext } from '../Context/Contexts';
 
 
@@ -11,51 +8,95 @@ function Queue2v2() {
   const { socket } = useTodoContext();
   const dispatch = useDispatch();
 
-  const addToQueueHandler = (id) => {
+  const duoAddToQueueHandler = (id) => {
     console.log('button pressed');
-    dispatch(wsAddToQueue(socket, id));
+    // dispatch(wsAddToQueue(socket, id));
   };
 
-  const exitQueueHandler = (id) => {
+  const duoExitQueueHandler = (id) => {
     console.log('exit button pressed');
-    dispatch(wsExitFromQueue(socket, id));
+    // dispatch(wsExitFromQueue(socket, id));
   };
 
   const moveDownHandler = (id) => {
     console.log('move down button pressed');
-    dispatch(wsMoveDownQueue(socket, id));
+    // dispatch(wsMoveDownQueue(socket, id));
   };
 
-  const winHandler = (winnerId, loserId) => {
+  const duoWinHandler = (winnerId, loserId) => {
     console.log('win pressed');
-    dispatch(wsWin(socket, winnerId, loserId));
+    // dispatch(wsWin(socket, winnerId, loserId));
   };
 
   return (
     <>
       <div className="winner-btn-wrapper">
-        <button type="submit" className="winner-btn" onClick={() => winHandler(queue[0].user_id, queue[1].user_id)}>Победил</button>
-        <button type="submit" className="winner-btn" onClick={() => winHandler(queue[1].user_id, queue[0].user_id)}>Победил</button>
+        <button type="submit" className="winner-btn" onClick={() => duoWinHandler(queue[0].pair_id, queue[1].pair_id)}>Победил</button>
+        <button type="submit" className="winner-btn" onClick={() => duoWinHandler(queue[1].pair_id, queue[0].pair_id)}>Победил</button>
+      </div>
+      <div className="kick-btn-wrapper">
+        <button type="submit" className="kick-btn" onClick={() => duoExitQueueHandler(queue[0].pair_id)}>Не явились</button>
+        <button type="submit" className="kick-btn" onClick={() => duoExitQueueHandler(queue[1].pair_id)}>Не явились</button>
       </div>
       <div className="queue-wrapper">
         <img className="tennis-table-img" src="/images/table-tennis.png" alt="" />
         <div className="gamers-wrapper">
           <div className="gamers-wrapper-left">
             <div className="gamer">
-              {queue.length && <span>{queue.find((el, index) => (index === 0)).User.nickName}</span>}
+              {queue.length > 0 && (
+              <span>
+                {queue[0] && queue[0].Pair.user1.nickName}
+              </span>
+              )}
+              {!queue.length && (
+                <span>
+                  Свободно
+                </span>
+              )}
             </div>
-            <div className="gamer" />
+            <div className="gamer">
+              {queue.length > 0 && (
+              <span>
+                {queue[0] && queue[0].Pair.user1.nickName}
+              </span>
+              )}
+              {queue.length < 2 && (
+                <span>
+                  Свободно
+                </span>
+              )}
+            </div>
           </div>
           <div className="gamers-wrapper-right">
-            <div className="gamer" />
             <div className="gamer">
-              {queue.length && <span>{queue.find((el, index) => (index === 1)).User.nickName}</span>}
+              {queue.length > 0 && (
+              <span>
+                {queue[1] && queue[1].Pair.user1.nickName}
+              </span>
+              )}
+              {queue.length < 3 && (
+                <span>
+                  Свободно
+                </span>
+              )}
+            </div>
+            <div className="gamer">
+              {queue.length > 0 && (
+              <span>
+                {queue[1] && queue[1].Pair.user1.nickName}
+              </span>
+              )}
+              {queue.length < 4 && (
+                <span>
+                  Свободно
+                </span>
+              )}
             </div>
           </div>
         </div>
         <div className="kick-btn-wrapper">
-          <button type="submit" className="kick-btn" onClick={() => exitQueueHandler(queue[0].user_id)}>Не явился</button>
-          <button type="submit" className="kick-btn" onClick={() => exitQueueHandler(queue[1].user_id)}>Не явился</button>
+          <button type="submit" className="kick-btn" onClick={() => duoExitQueueHandler(queue[0].pair_id)}>Не явились</button>
+          <button type="submit" className="kick-btn" onClick={() => duoExitQueueHandler(queue[1].pair_id)}>Не явились</button>
         </div>
         {queue && queue.map((el, index) => {
           if (index === 0 || index === 1) {
@@ -66,7 +107,7 @@ function Queue2v2() {
           return (
             <div className="queue-users-wrapper" key={el.id}>
               <div className="left-user">
-                <button type="submit" className="user-btn">{el.User.nickName}</button>
+                <button type="submit" className="user-btn">{el.Pair.user1.nickName}</button>
               </div>
               <div><span>—</span></div>
               <div className="right-user">
@@ -75,13 +116,13 @@ function Queue2v2() {
             </div>
           );
         })}
-        {queue.find((el) => (user.id === el.User.id)) && (
+        {queue.find((el) => (user.id === el.Pair.user1_id || user.id === el.Pair.user2_id)) && (
           <div className="stay-to-queue-wrapper">
-            {queue.indexOf(queue.find((el) => (user.id === el.User.id))) !== queue.length - 1 && <button type="submit" className="stay-to-queue-btn" onClick={() => moveDownHandler(user.id)}>Пропустить очередь</button>}
-            <button type="submit" className="stay-to-queue-btn" onClick={() => exitQueueHandler(user.id)}>Выйти из очереди</button>
+            {queue.indexOf(queue.find((el) => (user.id === el.Pair.user1_id || user.id === el.Pair.user2_id))) !== queue.length - 1 && <button type="submit" className="stay-to-queue-btn" onClick={() => moveDownHandler(user.id)}>Пропустить очередь</button>}
+            <button type="submit" className="stay-to-queue-btn" onClick={() => duoExitQueueHandler(user.id)}>Выйти из очереди</button>
           </div>
         )}
-        {!queue.find((el) => (user.id === el.User.id)) && (<button type="submit" className="stay-to-queue-btn" onClick={() => addToQueueHandler(user.id)}>Встать в очередь</button>)}
+        {!queue.find((el) => (user.id === el.Pair.user1_id || user.id === el.Pair.user2_id)) && (<button type="submit" className="stay-to-queue-btn" onClick={() => duoAddToQueueHandler(user.id)}>Встать в очередь</button>)}
       </div>
     </>
   );

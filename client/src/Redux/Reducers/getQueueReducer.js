@@ -1,5 +1,5 @@
 import {
-  ADD_TO_QUEUE, EXIT_FROM_QUEUE, GET_QUEUE, MOVE_DOWN_QUEUE, WIN,
+  ADD_TO_QUEUE, CHANGE_MODE, CHANGE_QUEUE, EXIT_FROM_QUEUE, GET_QUEUE, MOVE_DOWN_QUEUE, WIN,
 } from '../Types/types';
 
 const getQueueReducer = (state = [], action) => {
@@ -23,7 +23,9 @@ const getQueueReducer = (state = [], action) => {
     case WIN:
       console.log('мы удалили проигравшего из редакса', state);
       return payload;
-
+    case CHANGE_QUEUE:
+      console.log('мы добавили очередь в редакс', state);
+      return payload;
     default:
       return state;
   }
