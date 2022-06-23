@@ -21,6 +21,7 @@ import AuthRouter from './Components/AuthRouter/AuthRouter';
 import MySpin from './Components/MySpin/MySpin';
 import AuthMenu from './Components/AuthMenu/AuthMenu';
 import NewTournament from './Components/Tournament/NewTournament';
+import Queue2v2 from './Components/Queue/Queue2v2';
 
 
 function App() {
@@ -60,6 +61,7 @@ function App() {
                 <Route path="/rankings/duo" element={<DuoRankings />} />
               </Route>
               <Route path="/queue" element={<Queue />} />
+              <Route path="/queue/2v2" element={<Queue2v2 />} />
               <Route path="/tournaments" element={<Tournaments />} />
               <Route path="/tournaments/:id" element={<Tournament />} />
               <Route path="/tournaments/:id/registration" element={<NewTournament />} />

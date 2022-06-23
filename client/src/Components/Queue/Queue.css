@@ -36,6 +36,16 @@ ul {
   border: 0;
 }
 
+.empty-btn {
+  width: 120px;
+  height: 30px;
+  margin: 5px 0px;
+  font-size: 12px;
+  background-color: white;
+  color: #003686;
+  border: 1px solid #003686;
+}
+
 .stay-to-queue-wrapper {
   display: flex;
   justify-content: center;
@@ -118,4 +128,17 @@ ul {
 .kick-btn-wrapper {
   display: flex;
   justify-content: center;
+}
+
+.queue-users-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.left-user {
+  margin-right: 10px;
+}
+
+.right-user {
+  margin-left: 10px;
 }
