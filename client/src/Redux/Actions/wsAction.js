@@ -1,5 +1,5 @@
 import {
-  ADD_TO_QUEUE, CHANGE_MODE, EXIT_FROM_QUEUE, MOVE_DOWN_QUEUE, WIN,
+  ADD_TO_QUEUE, CHANGE_MODE, DUO_ADD_TO_QUEUE, DUO_EXIT_FROM_QUEUE, DUO_JOIN_PAIR_QUEUE, EXIT_FROM_QUEUE, MOVE_DOWN_QUEUE, WIN,
 } from '../Types/types';
 
 export const wsSendStart = (ws) => async (dispatch) => {
@@ -32,3 +32,17 @@ export const wsChangeMode = (ws, mode, prevMode) => async (dispatch) => {
   ws.send(JSON.stringify({ type: CHANGE_MODE, params: { mode, prevMode } }));
 };
 
+export const wsDuoAddToQueue = (ws, id) => async (dispatch) => {
+  console.log('wsDuoAddToQueue----------->>', 'user_id:', id, 'ws:', ws);
+  ws.send(JSON.stringify({ type: DUO_ADD_TO_QUEUE, params: { id } }));
+};
+
+export const wsDuoExitFromQueue = (ws, userId, pairId) => async (dispatch) => {
+  console.log('wsDuoExitFromQueue----------->>', 'user_id:', userId, 'pair_id:', pairId, 'ws:', ws);
+  ws.send(JSON.stringify({ type: DUO_EXIT_FROM_QUEUE, params: { userId, pairId } }));
+};
+
+export const wsDuoJoinPairQueue = (ws, userId, pairId) => async (dispatch) => {
+  console.log('wsDuoJoinPairQueue----------->>', 'user_id:', userId, 'pair_id:', pairId, 'ws:', ws);
+  ws.send(JSON.stringify({ type: DUO_JOIN_PAIR_QUEUE, params: { userId, pairId } }));
+};
