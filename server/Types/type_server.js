@@ -10,6 +10,7 @@ const EXIT_FROM_QUEUE = 'EXIT_FROM_QUEUE';
 const START = 'START';
 const MOVE_DOWN_QUEUE = 'MOVE_DOWN_QUEUE';
 const WIN = 'WIN';
+const CHANGE_MODE = 'CHANGE_MODE';
 
 module.exports = {
   GET_SOLO_RANKS,
@@ -24,4 +25,5 @@ module.exports = {
   START,
   MOVE_DOWN_QUEUE,
   WIN,
+  CHANGE_MODE,
 };

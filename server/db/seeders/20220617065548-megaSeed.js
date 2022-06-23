@@ -5,6 +5,7 @@ const tourGames = require('../testData/tourGames');
 const queues = require('../testData/queues');
 const duoreg = require('../testData/duoreg');
 const soloreg = require('../testData/soloreg');
+const queueType = require('../testData/queueType');
 
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -25,6 +26,7 @@ module.exports = {
     await queryInterface.bulkInsert('Queues', queues, {});
     await queryInterface.bulkInsert('DuoTourRegs', duoreg, {});
     await queryInterface.bulkInsert('SoloTourRegs', soloreg, {});
+    await queryInterface.bulkInsert('QueueTypes', queueType, {});
   },
 
   async down(queryInterface, Sequelize) {

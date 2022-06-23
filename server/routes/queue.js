@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Queue, User } = require('../db/models');
+const { Queue, User, QueueType } = require('../db/models');
 
 router.get('/getqueue', async (req, res) => {
   const queue = await Queue.findAll(
@@ -24,6 +24,13 @@ router.put('/movedown/:idTop/:idBot', async (req, res) => {
   await userTop.update({ user_id: req.params.idBot });
   await userBot.update({ user_id: req.params.idTop });
   res.sendStatus(200);
+});
+
+router.get('/getmode', async (req, res) => {
+  const mode = await QueueType.findOne({
+    where: { isActive: true },
+  });
+  res.json(mode.mode);
 });
 
 module.exports = router;
