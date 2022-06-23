@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate({ Pair }) {
       // define association here
-      this.hasOne(Pair, { foreignKey: 'pair_id' });
+      this.belongsTo(Pair, { foreignKey: 'pair_id' });
     }
   }
   QueueDuo.init({
