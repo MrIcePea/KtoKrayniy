@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
   tournaments: tournamentsReducer,
   tournament: tournamentReducer,
   user: userReducer,
-  regirstrationList: getTournamentRegistrationListReducer,
+  regList: getTournamentRegistrationListReducer,
 });
 
 export default rootReducer;

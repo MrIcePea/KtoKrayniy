@@ -22,6 +22,7 @@ import MySpin from './Components/MySpin/MySpin';
 import AuthMenu from './Components/AuthMenu/AuthMenu';
 import NewTournament from './Components/Tournament/NewTournament';
 import Queue2v2 from './Components/Queue/Queue2v2';
+import Admin from './Components/Admin/Admin';
 
 
 function App() {
@@ -65,6 +66,7 @@ function App() {
               <Route path="/tournaments" element={<Tournaments />} />
               <Route path="/tournaments/:id" element={<Tournament />} />
               <Route path="/tournaments/:id/registration" element={<NewTournament />} />
+              <Route path="/admin" element={<Admin />} />
             </Routes>
           )}
         {/* </Container> */}
