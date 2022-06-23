@@ -24,15 +24,17 @@ function NewTournament() {
     });
   }, []); */
   function handleClick() {
-    dispatch(addUserToTournament(id, user));
+    dispatch(addUserToTournament(id, user.id, tournaments[0].mode));
   }
   return (
+
     <div className="new-tournament-wrapper">
       <h3>Новый турнир</h3>
       <div>
         <button className="user-btn" type="submit">elefant86</button>
       </div>
       <button className="add-to-tournament-btn" type="submit" onClick={handleClick}>Участвовать</button>
+
 
     </div>
   );
