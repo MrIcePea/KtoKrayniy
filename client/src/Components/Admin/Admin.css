@@ -1,0 +1,16 @@
+.add-user-admin-wrapper {
+  margin: 20px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-user-admin-item {
+  font-size: 22px;
+  margin-left: 5px;
+}
+
+.add-user-admin-checkbox {
+  width: 15px;
+  height: 15px;
+}

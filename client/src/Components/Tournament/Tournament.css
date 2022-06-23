@@ -163,3 +163,33 @@
   width: 100%;
 }
 
+.new-tournament-wrapper {
+  margin: 20px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-to-tournament-btn {
+  background-color: #171b20;
+  width: 160px;
+  height: 50px;
+  margin: 15px 10px;
+  font-size: 12px;
+  color: white;
+  border: 0;
+}
+
+.add-to-tournament-btn:hover {
+  background-color: #31353b;
+}
+
+.user-btn {
+  width: 120px;
+  height: 30px;
+  margin: 5px 0px;
+  font-size: 12px;
+  background-color: #003686;
+  color: white;
+  border: 0;
+}

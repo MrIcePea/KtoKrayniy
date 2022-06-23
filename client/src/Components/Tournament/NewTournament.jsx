@@ -9,6 +9,7 @@ function NewTournament() {
   const { id } = useParams();
   const { tournaments } = useSelector((state) => state);
   const { user } = useSelector((state) => state);
+  const { regList } = useSelector((state) => state);
   useEffect(() => {
     tournaments.forEach((el) => {
       if (el.id === id && el.mode === '1x1') {
@@ -18,15 +19,22 @@ function NewTournament() {
       }
     });
   }, []);
+  /* useEffect(() => {
+    regList.forEach((el) => {
+    });
+  }, []); */
   function handleClick() {
-    dispatch(addUserToTournament(id, user));
+    dispatch(addUserToTournament(id, user.id, tournaments[0].mode));
   }
   return (
-    <div>
-      <h2>Новый турнир</h2>
-      <h4>1:32:27</h4>
-      <button type="submit" onClick={() => console.log(user)}>click</button>
-      <button type="submit" onClick={handleClick}>Участвовать</button>
+
+    <div className="new-tournament-wrapper">
+      <h3>Новый турнир</h3>
+      <div>
+        <button className="user-btn" type="submit">elefant86</button>
+      </div>
+      <button className="add-to-tournament-btn" type="submit" onClick={handleClick}>Участвовать</button>
+
 
     </div>
   );
