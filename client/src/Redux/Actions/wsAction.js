@@ -27,8 +27,8 @@ export const wsWin = (ws, winnerId, loserId) => async (dispatch) => {
   ws.send(JSON.stringify({ type: WIN, params: { winnerId, loserId } }));
 };
 
-export const wsChangeMode = (ws, mode) => async (dispatch) => {
-  console.log('wsChangeMode----------->>', 'mode:', mode, 'ws:', ws);
-  ws.send(JSON.stringify({ type: CHANGE_MODE, params: { mode } }));
+export const wsChangeMode = (ws, mode, prevMode) => async (dispatch) => {
+  console.log('wsChangeMode----------->>', 'mode:', mode, 'prevMode', prevMode, 'ws:', ws);
+  ws.send(JSON.stringify({ type: CHANGE_MODE, params: { mode, prevMode } }));
 };
 

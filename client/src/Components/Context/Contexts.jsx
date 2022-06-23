@@ -4,7 +4,7 @@ import {
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  addToQueue, changeMode, deleteFromQueue, moveDownQueue, Queue, win,
+  addToQueue, changeMode, changeQueue, deleteFromQueue, moveDownQueue, Queue, win,
 } from '../../Redux/Actions/getQueueAction';
 import {
   ADD_TO_QUEUE, CHANGE_MODE, EXIT_FROM_QUEUE, MOVE_DOWN_QUEUE, START, WIN,
@@ -61,6 +61,7 @@ export default function TodoContextProvider({ children }) {
         break;
       case CHANGE_MODE:
         dispatch(changeMode(mode));
+        dispatch(changeQueue(queue));
         break;
       default:
         console.log('error switch context');

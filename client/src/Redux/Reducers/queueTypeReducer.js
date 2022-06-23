@@ -6,6 +6,7 @@ const queueTypeReducer = (state = '', action) => {
     case GET_MODE:
       return payload;
     case CHANGE_MODE:
+      console.log('мы добавили режим в редакс');
       return payload;
     default:
       return state;

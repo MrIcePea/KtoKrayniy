@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {
-  ADD_TO_QUEUE, GET_QUEUE, EXIT_FROM_QUEUE, MOVE_DOWN_QUEUE, WIN, CHANGE_MODE, GET_MODE,
+  ADD_TO_QUEUE, GET_QUEUE, EXIT_FROM_QUEUE, MOVE_DOWN_QUEUE, WIN, CHANGE_MODE, GET_MODE, CHANGE_QUEUE,
 } from '../Types/types';
 
 export const Queue = (value) => ({
@@ -59,6 +59,14 @@ export const win = (value) => {
   console.log('------', value);
   return {
     type: WIN,
+    payload: value,
+  };
+};
+
+export const changeQueue = (value) => {
+  console.log('------', value);
+  return {
+    type: CHANGE_QUEUE,
     payload: value,
   };
 };
