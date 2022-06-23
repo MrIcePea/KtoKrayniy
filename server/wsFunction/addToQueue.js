@@ -24,6 +24,5 @@ async function addToQueue(mapQueue, params) {
     console.log('id user которому отправляются данные', el.userId);
     el.send(JSON.stringify(message));
   });
-
 }
 module.exports = addToQueue;

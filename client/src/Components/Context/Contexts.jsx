@@ -3,8 +3,12 @@ import {
 } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToQueue, deleteFromQueue, Queue } from '../../Redux/Actions/getQueueAction';
-import { EXIT_FROM_QUEUE } from '../../Redux/Types/types';
+import {
+  addToQueue, deleteFromQueue, moveDownQueue, Queue, win,
+} from '../../Redux/Actions/getQueueAction';
+import {
+  ADD_TO_QUEUE, EXIT_FROM_QUEUE, MOVE_DOWN_QUEUE, START, WIN,
+} from '../../Redux/Types/types';
 
 const TodoContext = createContext();
 console.log(process.env.REACT_APP_WS_URL);
@@ -38,14 +42,21 @@ export default function TodoContextProvider({ children }) {
     const { type, params } = JSON.parse(event.data);
     const { queue } = params;
     switch (type) {
-      case 'START':
+      case START:
         dispatch(Queue(queue));
         break;
-      case 'ADD_TO_QUEUE':
+      case ADD_TO_QUEUE:
         dispatch(addToQueue(queue));
         break;
       case EXIT_FROM_QUEUE:
         dispatch(deleteFromQueue(queue));
+        break;
+      case MOVE_DOWN_QUEUE:
+        console.log('queue in case', queue);
+        dispatch(moveDownQueue(queue));
+        break;
+      case WIN:
+        dispatch(win(queue));
         break;
       default:
         console.log('error switch context');
