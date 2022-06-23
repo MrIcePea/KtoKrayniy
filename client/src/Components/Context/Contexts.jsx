@@ -4,11 +4,12 @@ import {
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  addToQueue, deleteFromQueue, moveDownQueue, Queue, win,
+  addToQueue, changeMode, deleteFromQueue, moveDownQueue, Queue, win,
 } from '../../Redux/Actions/getQueueAction';
 import {
-  ADD_TO_QUEUE, EXIT_FROM_QUEUE, MOVE_DOWN_QUEUE, START, WIN,
+  ADD_TO_QUEUE, CHANGE_MODE, EXIT_FROM_QUEUE, MOVE_DOWN_QUEUE, START, WIN,
 } from '../../Redux/Types/types';
+
 
 const TodoContext = createContext();
 console.log(process.env.REACT_APP_WS_URL);
@@ -40,7 +41,7 @@ export default function TodoContextProvider({ children }) {
     console.log(`Получены данные ${event.data}`);
     console.log('4--------------------');
     const { type, params } = JSON.parse(event.data);
-    const { queue } = params;
+    const { queue, mode } = params;
     switch (type) {
       case START:
         dispatch(Queue(queue));
@@ -57,6 +58,9 @@ export default function TodoContextProvider({ children }) {
         break;
       case WIN:
         dispatch(win(queue));
+        break;
+      case CHANGE_MODE:
+        dispatch(changeMode(mode));
         break;
       default:
         console.log('error switch context');

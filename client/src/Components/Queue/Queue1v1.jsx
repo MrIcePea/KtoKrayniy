@@ -5,10 +5,9 @@ import {
 } from '../../Redux/Actions/wsAction';
 import { useTodoContext } from '../Context/Contexts';
 
-
-function Queue2v2() {
+function Queue1v1() {
   const { queue, user } = useSelector((state) => state);
-  const { socket } = useTodoContext();
+  const { socket, readyState } = useTodoContext();
   const dispatch = useDispatch();
 
   const addToQueueHandler = (id) => {
@@ -30,7 +29,6 @@ function Queue2v2() {
     console.log('win pressed');
     dispatch(wsWin(socket, winnerId, loserId));
   };
-
   return (
     <>
       <div className="winner-btn-wrapper">
@@ -64,22 +62,16 @@ function Queue2v2() {
             );
           }
           return (
-            <div className="queue-users-wrapper" key={el.id}>
-              <div className="left-user">
-                <button type="submit" className="user-btn">{el.User.nickName}</button>
-              </div>
-              <div><span>—</span></div>
-              <div className="right-user">
-                <button type="submit" className="empty-btn">Свободно</button>
-              </div>
+            <div key={el.id}>
+              <button type="submit" className="user-btn">{el.User.nickName}</button>
             </div>
           );
         })}
         {queue.find((el) => (user.id === el.User.id)) && (
-          <div className="stay-to-queue-wrapper">
-            {queue.indexOf(queue.find((el) => (user.id === el.User.id))) !== queue.length - 1 && <button type="submit" className="stay-to-queue-btn" onClick={() => moveDownHandler(user.id)}>Пропустить очередь</button>}
-            <button type="submit" className="stay-to-queue-btn" onClick={() => exitQueueHandler(user.id)}>Выйти из очереди</button>
-          </div>
+        <div className="stay-to-queue-wrapper">
+          { queue.indexOf(queue.find((el) => (user.id === el.User.id))) !== queue.length - 1 && <button type="submit" className="stay-to-queue-btn" onClick={() => moveDownHandler(user.id)}>Пропустить очередь</button>}
+          <button type="submit" className="stay-to-queue-btn" onClick={() => exitQueueHandler(user.id)}>Выйти из очереди</button>
+        </div>
         )}
         {!queue.find((el) => (user.id === el.User.id)) && (<button type="submit" className="stay-to-queue-btn" onClick={() => addToQueueHandler(user.id)}>Встать в очередь</button>)}
       </div>
@@ -87,4 +79,4 @@ function Queue2v2() {
   );
 }
 
-export default Queue2v2;
+export default Queue1v1;
