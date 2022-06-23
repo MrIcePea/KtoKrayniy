@@ -47,9 +47,12 @@ router.route('/signup')
         role: 'user',
         active: true,
         ban: false,
-        rank: 0,
-        won: 0,
-        lost: 0,
+        solorank: 150,
+        duorank: 150,
+        solowon: 0,
+        sololost: 0,
+        duowon: 0,
+        duolost: 0,
         pass: await bcrypt.hash(pass, 10),
       });
       req.session.user = { name: user.nickName, id: user.id, role: user.role };

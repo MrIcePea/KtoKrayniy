@@ -28,8 +28,8 @@ async function win(mapQueue, params) {
   const winner = await User.findByPk(winnerId);
   const loser = await User.findByPk(loserId);
   const points = calculatePoints(winner.solorank, loser.solorank);
-  await winner.update({ solorank: winner.solorank + points });
-  await loser.update({ solorank: loser.solorank - points });
+  await winner.update({ solorank: winner.solorank + points, solowon: winner.solowon + 1 });
+  await loser.update({ solorank: loser.solorank - points, sololost: loser.sololost + 1 });
   const queue = await Queue.findAll(
     {
       order: [
