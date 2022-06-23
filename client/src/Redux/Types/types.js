@@ -10,3 +10,4 @@ export const EXIT_FROM_QUEUE = 'EXIT_FROM_QUEUE';
 export const MOVE_DOWN_QUEUE = 'MOVE_DOWN_QUEUE';
 export const START = 'START';
 export const WIN = 'WIN';
+export const ADD_TOURNAMENT = 'ADD_TOURNAMENT';

@@ -7,8 +7,8 @@ export const registrationToTournament = (value) => ({
 });
 
 export const addUserToTournament = (id, user, mode) => async (dispatch) => {
+  console.log('id, user, mode------->', id, user, mode);
   try {
-    const resp = { id, user };
     const response = await axios({ url: `tournaments/${id}/${user}/${mode}`, baseURL: 'http://localhost:3001/' });
     dispatch(registrationToTournament(response.data));
   } catch (err) {

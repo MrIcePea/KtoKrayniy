@@ -11,6 +11,9 @@ import './Signin.css';
 export default function SignIn() {
   const [inputs, setInputs] = useState({});
   const dispatch = useDispatch();
+
+  // console.log('inputs-------', inputs);
+
   const inputHandler = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };

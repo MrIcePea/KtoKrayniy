@@ -7,8 +7,12 @@ import { getRegistrationList1v1, getRegistrationList2v2 } from '../../Redux/Acti
 function NewTournament() {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { tournaments } = useSelector((state) => state);
-  const { user } = useSelector((state) => state);
+  const {
+    tournaments, soloRank, DuoRank, user,
+  } = useSelector((state) => state);
+  const findeTourn = tournaments.find((el) => el.id === Number(id));
+
+
   const { regList } = useSelector((state) => state);
   useEffect(() => {
     tournaments.forEach((el) => {
@@ -19,23 +23,18 @@ function NewTournament() {
       }
     });
   }, []);
-  /* useEffect(() => {
-    regList.forEach((el) => {
-    });
-  }, []); */
-  function handleClick() {
-    dispatch(addUserToTournament(id, user.id, tournaments[0].mode));
-  }
+
+  const handleClick = (val1, val2, val3) => {
+    dispatch(addUserToTournament(val1, val2, val3));
+  };
   return (
 
     <div className="new-tournament-wrapper">
       <h3>Новый турнир</h3>
       <div>
-        <button className="user-btn" type="submit">elefant86</button>
+        <button className="user-btn" type="submit">elefant</button>
       </div>
-      <button className="add-to-tournament-btn" type="submit" onClick={handleClick}>Участвовать</button>
-
-
+      <button className="add-to-tournament-btn" type="submit" onClick={() => { handleClick(id, user.id, findeTourn.mode); }}>Участвовать</button>
     </div>
   );
 }

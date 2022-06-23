@@ -65,7 +65,7 @@ function App() {
               <Route path="/queue/2v2" element={<Queue2v2 />} />
               <Route path="/tournaments" element={<Tournaments />} />
               <Route path="/tournaments/:id" element={<Tournament />} />
-              <Route path="/tournaments/:id/registration" element={<NewTournament />} />
+              <Route path="/tournaments/registration/:id" element={<NewTournament />} />
               <Route path="/admin" element={<Admin />} />
             </Routes>
           )}

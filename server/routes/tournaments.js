@@ -1,6 +1,6 @@
-const { SoloTourReg, DuoTourReg } = require('../db/models');
+// const express = require('express');
 const router = require('express').Router();
-const express = require('express');
+const { SoloTourReg, DuoTourReg } = require('../db/models');
 const { Tournament, TourGame, User } = require('../db/models');
 
 const placements = ['1/64', '1/32', '1/16', '1/8', '1/4', 'fourth', 'third', 'second', 'first'];
@@ -11,24 +11,23 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id/:user/:mode', async (req, res) => {
-  const { id } = req.params;
-  const { user } = req.params;
-  const { mode } = req.params;
-  console.log('-----------id , user', id, user);
-  console.log('-----------toString(mode)', typeof (mode));
+  const { user, mode } = req.params;
+  console.log('--------typeof (mode)', typeof (mode), mode.length);
   switch (mode) {
-    case '1x1':
-      await SoloTourReg.create({ user_id: user }); break;
-    case '2x2':
-      await DuoTourReg.create({ user_id: user }); break;
-
+    case '1х1':
+      console.log('--------заход---', typeof (mode), mode);
+      await SoloTourReg.create({ user_id: user });
+      break;
+    case '2х2':
+      await DuoTourReg.create({ user_id: user });
+      break;
     default:
       console.log('error switch onmessage');
       break;
   }
-  const solo = await SoloTourReg.findAll();
-  const duo = await DuoTourReg.findAll();
-  console.log('duo-------solo', duo, solo);
+  // const solo = await SoloTourReg.findAll();
+  // const duo = await DuoTourReg.findAll();
+  // console.log('duo-------solo', duo, solo);
 });
 
 router.get('/:id', async (req, res) => {
@@ -111,6 +110,16 @@ router.get('/:id', async (req, res) => {
     }
   }
   res.json(response);
+});
+
+router.post('/addtournament', async (req, res) => {
+  const { name, mode, date } = req.body;
+  console.log('submitHandler = (e)--------------', name, mode, date);
+  await Tournament.create({
+    name, mode, date, first_round: '-',
+  });
+  const respon = await Tournament.findAll();
+  res.json(respon);
 });
 
 module.exports = router;
