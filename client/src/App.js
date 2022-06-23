@@ -23,6 +23,7 @@ import AuthMenu from './Components/AuthMenu/AuthMenu';
 import NewTournament from './Components/Tournament/NewTournament';
 import Queue2v2 from './Components/Queue/Queue2v2';
 import Admin from './Components/Admin/Admin';
+import AdminBan from './Components/Admin/AdminBan';
 
 
 function App() {
@@ -67,6 +68,7 @@ function App() {
               <Route path="/tournaments/:id" element={<Tournament />} />
               <Route path="/tournaments/:id/registration" element={<NewTournament />} />
               <Route path="/admin" element={<Admin />} />
+              <Route path="/admin/ban" element={<AdminBan />} />
             </Routes>
           )}
         {/* </Container> */}

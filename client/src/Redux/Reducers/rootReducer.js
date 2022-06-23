@@ -7,6 +7,7 @@ import tournamentsReducer from './tournamentsReducer';
 import tournamentReducer from './tournamentReducer';
 import getTournamentRegistrationListReducer from './getTournamentRegistrationListReducer';
 import queueTypeReducer from './queueTypeReducer';
+import getAllUsersReducer from './getAllUsersReducer';
 
 const rootReducer = combineReducers({
   soloRank: SoloRankReducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   queueType: queueTypeReducer,
   regList: getTournamentRegistrationListReducer,
+  allUsers: getAllUsersReducer,
 });
 
 export default rootReducer;
