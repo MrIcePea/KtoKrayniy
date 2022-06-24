@@ -23,12 +23,18 @@ const adminRouter = require('./routes/adminRouter');
 const getQueue = require('./wsFunction/getQueue');
 const addToQueue = require('./wsFunction/addToQueue');
 const {
-  EXIT_FROM_QUEUE, ADD_TO_QUEUE, START, MOVE_DOWN_QUEUE, WIN, CHANGE_MODE,
+  EXIT_FROM_QUEUE, ADD_TO_QUEUE, START, MOVE_DOWN_QUEUE, WIN, CHANGE_MODE, DUO_ADD_TO_QUEUE, DUO_EXIT_FROM_QUEUE, DUO_JOIN_PAIR_QUEUE, DUO_MOVE_DOWN_QUEUE, DUO_WIN_QUEUE,
 } = require('./Types/type_server');
 const exitFromQueue = require('./wsFunction/exitFromQueue');
 const moveDownQueue = require('./wsFunction/moveDownQueue');
 const win = require('./wsFunction/win');
 const changeMode = require('./wsFunction/changeMode');
+const getQueueAndMode = require('./wsFunction/getQueue');
+const duoAddToQueue = require('./wsFunction/duoAddToQueue');
+const duoExitFromQueue = require('./wsFunction/duoExitFromQueue');
+const duoJoinPairQueue = require('./wsFunction/duoJoinPairQueue');
+const duoMoveDownQueue = require('./wsFunction/duoMoveDownQueue');
+const duoWinQueue = require('./wsFunction/duoWinQueue');
 
 const sessionParser = session({
   store: new FileStore({}),
@@ -138,7 +144,7 @@ wss.on('connection', (ws, req) => {
     const { type, params } = JSON.parse(message);
     switch (type) {
       case START:
-        await getQueue(mapQueue);
+        await getQueueAndMode(mapQueue);
         break;
       case ADD_TO_QUEUE:
         await addToQueue(mapQueue, params);
@@ -154,6 +160,21 @@ wss.on('connection', (ws, req) => {
         break;
       case CHANGE_MODE:
         await changeMode(mapQueue, params);
+        break;
+      case DUO_ADD_TO_QUEUE:
+        await duoAddToQueue(mapQueue, params);
+        break;
+      case DUO_EXIT_FROM_QUEUE:
+        await duoExitFromQueue(mapQueue, params);
+        break;
+      case DUO_JOIN_PAIR_QUEUE:
+        await duoJoinPairQueue(mapQueue, params);
+        break;
+      case DUO_MOVE_DOWN_QUEUE:
+        await duoMoveDownQueue(mapQueue, params);
+        break;
+      case DUO_WIN_QUEUE:
+        await duoWinQueue(mapQueue, params);
         break;
       default:
         console.log('error switch onmessage');
