@@ -1,5 +1,5 @@
 import {
-  ADD_TO_QUEUE, CHANGE_MODE, DUO_ADD_TO_QUEUE, DUO_EXIT_FROM_QUEUE, DUO_JOIN_PAIR_QUEUE, EXIT_FROM_QUEUE, MOVE_DOWN_QUEUE, WIN,
+  ADD_TO_QUEUE, CHANGE_MODE, DUO_ADD_TO_QUEUE, DUO_EXIT_FROM_QUEUE, DUO_JOIN_PAIR_QUEUE, DUO_MOVE_DOWN_QUEUE, DUO_WIN_QUEUE, EXIT_FROM_QUEUE, MOVE_DOWN_QUEUE, WIN,
 } from '../Types/types';
 
 export const wsSendStart = (ws) => async (dispatch) => {
@@ -46,3 +46,15 @@ export const wsDuoJoinPairQueue = (ws, userId, pairId) => async (dispatch) => {
   console.log('wsDuoJoinPairQueue----------->>', 'user_id:', userId, 'pair_id:', pairId, 'ws:', ws);
   ws.send(JSON.stringify({ type: DUO_JOIN_PAIR_QUEUE, params: { userId, pairId } }));
 };
+
+export const wsDuoMoveDownQueue = (ws, pairId) => async (dispatch) => {
+  console.log('wsDuoMoveDownQueue----------->>', 'pair_id:', pairId, 'ws:', ws);
+  ws.send(JSON.stringify({ type: DUO_MOVE_DOWN_QUEUE, params: { pairId } }));
+};
+
+export const wsDuoWin = (ws, winnerPairId, loserPairId) => async (dispatch) => {
+  console.log('wsDuoWin----------->>', 'winner_pair_id:', winnerPairId, 'loser_pair_id:', loserPairId, 'ws:', ws);
+  ws.send(JSON.stringify({ type: DUO_WIN_QUEUE, params: { winnerPairId, loserPairId } }));
+};
+
+

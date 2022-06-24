@@ -7,7 +7,7 @@ import {
   addToQueue, changeMode, changeQueue, deleteFromQueue, duoJoinPairQueue, Mode, moveDownQueue, Queue, win,
 } from '../../Redux/Actions/getQueueAction';
 import {
-  ADD_TO_QUEUE, CHANGE_MODE, DUO_ADD_TO_QUEUE, DUO_EXIT_FROM_QUEUE, DUO_JOIN_PAIR_QUEUE, EXIT_FROM_QUEUE, MOVE_DOWN_QUEUE, START, WIN,
+  ADD_TO_QUEUE, CHANGE_MODE, DUO_ADD_TO_QUEUE, DUO_EXIT_FROM_QUEUE, DUO_JOIN_PAIR_QUEUE, DUO_MOVE_DOWN_QUEUE, DUO_WIN_QUEUE, EXIT_FROM_QUEUE, MOVE_DOWN_QUEUE, START, WIN,
 } from '../../Redux/Types/types';
 
 
@@ -63,10 +63,15 @@ export default function TodoContextProvider({ children }) {
         dispatch(duoJoinPairQueue(queue));
         break;
       case MOVE_DOWN_QUEUE:
-        console.log('queue in case', queue);
+        dispatch(moveDownQueue(queue));
+        break;
+      case DUO_MOVE_DOWN_QUEUE:
         dispatch(moveDownQueue(queue));
         break;
       case WIN:
+        dispatch(win(queue));
+        break;
+      case DUO_WIN_QUEUE:
         dispatch(win(queue));
         break;
       case CHANGE_MODE:
