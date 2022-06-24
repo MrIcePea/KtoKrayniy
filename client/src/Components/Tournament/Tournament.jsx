@@ -12,7 +12,6 @@ function Tournament() {
   useEffect(() => {
     dispatch(getTournament(id));
   }, [id]);
-  /*   const players = tournament.players.map((el) => return ) */
   return (
     <div className="tournament-wrapper">
       <div className="nav-tabs-wrapper">
@@ -47,12 +46,7 @@ function Tournament() {
                         {pair[1].won ? <div className="winner">{pair[1].User.nickName}</div> : <div className="loser">{pair[1].User.nickName}</div>}
                       </Col>
                     </Row>
-                    {/* {pair.map((pl) => (
-                      <div className="myTableRow">
-                        {pl.won && <div className="winner">{pl.User.nickName}</div>}
-                        {!pl.won && <div className="loser">{pl.User.nickName}</div>}
-                      </div>
-                    ))} */}
+
                   </td>
                 </tr>
 
@@ -64,24 +58,6 @@ function Tournament() {
       ))}
     </div>
   );
-  // return (
-  //   <div>
-  //     <ul className="nav nav-tabs tabs__items">
-  //       {tournament.map((el, index) => (
-  //         <div key={index}>
-  //           <li className="nav-item">
-  //             <a className="nav-link tabs__item" href={`#tab-${index}`}>{el.round}</a>
-  //           </li>
-  //           <div className="tabs__block" id={`tab-${index}`}>
-  //             {el.players.map((elem) => (
-  //               <p>{elem.user_id}</p>
-  //             ))}
-  //           </div>
-  //         </div>
-  //       ))}
-  //     </ul>
-  //   </div>
-  // );
 }
 
 export default Tournament;

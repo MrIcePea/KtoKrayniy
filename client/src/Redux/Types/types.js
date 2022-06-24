@@ -11,3 +11,4 @@ export const MOVE_DOWN_QUEUE = 'MOVE_DOWN_QUEUE';
 export const START = 'START';
 export const WIN = 'WIN';
 export const ADD_TOURNAMENT = 'ADD_TOURNAMENT';
+export const GET_SOLO_TOUR_REGS = 'GET_SOLO_TOUR_REGS';

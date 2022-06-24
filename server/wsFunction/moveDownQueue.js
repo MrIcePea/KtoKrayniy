@@ -40,7 +40,6 @@ async function moveDownQueue(mapQueue, params) {
       },
     },
   );
-  // console.log('Our queue users to switch places ----->', JSON.parse(JSON.stringify(queue[userIndex])), JSON.parse(JSON.stringify(queue[userIndex + 1])));
   const message = { type: MOVE_DOWN_QUEUE, params: { queue } };
   mapQueue.forEach((el) => {
     console.log('id user которому отправляются данные', el.userId);

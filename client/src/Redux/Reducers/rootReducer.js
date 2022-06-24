@@ -7,6 +7,8 @@ import tournamentsReducer from './tournamentsReducer';
 import tournamentReducer from './tournamentReducer';
 import getTournamentRegistrationListReducer from './getTournamentRegistrationListReducer';
 import addTournamentReducer from './addTournamentReducer';
+import soloTourRegsReducer from './soloTourRegsReducer';
+// import duoTourRegsReducer from './duoTourRegsReducer';
 
 const rootReducer = combineReducers({
   soloRank: SoloRankReducer,
@@ -17,6 +19,9 @@ const rootReducer = combineReducers({
   user: userReducer,
   regList: getTournamentRegistrationListReducer,
   addTourn: addTournamentReducer,
+  soloTourRegs: soloTourRegsReducer,
+  // duoTourRegs: duoTourRegsReducer,
+
 });
 
 export default rootReducer;

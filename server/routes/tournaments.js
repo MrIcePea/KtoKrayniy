@@ -10,6 +10,17 @@ router.get('/', async (req, res) => {
   res.json(tournaments);
 });
 
+router.get('/getsolotours', async (req, res) => {
+  console.log('get сработал----------->>>>>');
+  const respon = await SoloTourReg.findAll({
+    include: {
+      model: User,
+      attributes: ['nickName'],
+    },
+  });
+  res.json(respon);
+});
+
 router.get('/:id/:user/:mode', async (req, res) => {
   const { user, mode } = req.params;
   console.log('--------typeof (mode)', typeof (mode), mode.length);

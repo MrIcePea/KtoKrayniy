@@ -1,6 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Routes, Route, Link } from 'react-router-dom';
-import { Container } from 'reactstrap';
 import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
@@ -10,7 +9,6 @@ import Main from './Components/Main/Main';
 import TopMenu from './Components/TopMenu/TopMenu';
 import Menu from './Components/Menu/Menu';
 import Queue from './Components/Queue/Queue';
-import Registration from './Components/Registration/Registration';
 import Tournaments from './Components/Tournament/Tournaments';
 import SoloRankings from './Components/Rating/SoloRankings';
 import DuoRankings from './Components/Rating/DuoRankings';
@@ -35,7 +33,6 @@ function App() {
     <div className="wrapper">
       <TopMenu />
       <div className="main">
-        {/* <Container overflow-hidden style={addStyle.input}> */}
         {user.isFetch
           ? <MySpin />
           : (
@@ -69,7 +66,6 @@ function App() {
               <Route path="/admin" element={<Admin />} />
             </Routes>
           )}
-        {/* </Container> */}
       </div>
       <div className="footer">
         <AuthMenu>
