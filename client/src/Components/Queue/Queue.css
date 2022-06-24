@@ -36,6 +36,16 @@ ul {
   border: 0;
 }
 
+.me-btn {
+  width: 120px;
+  height: 30px;
+  margin: 5px 0px;
+  font-size: 12px;
+  background-color: #171b20;
+  color: white;
+  border: 0;
+}
+
 .empty-btn {
   width: 120px;
   height: 30px;
@@ -101,12 +111,32 @@ ul {
   border: 0;
 }
 
+.dis-winner-btn {
+  background-color: #8e8686;
+  width: 130px;
+  height: 50px;
+  margin: 8px 10px;
+  font-size: 12px;
+  color: white;
+  border: 0;
+}
+
 .winner-btn:hover {
   background-color: #31353b;
 }
 
 .kick-btn {
   background-color: #d34547;
+  width: 130px;
+  height: 50px;
+  margin: 8px 10px;
+  font-size: 12px;
+  color: white;
+  border: 0;
+}
+
+.dis-kick-btn {
+  background-color: #8e8686;
   width: 130px;
   height: 50px;
   margin: 8px 10px;

@@ -82,7 +82,8 @@ function Queue1v1() {
             }
             return (
               <div key={el.id}>
-                <button type="submit" className="user-btn">{el.User.nickName}</button>
+                { user.id !== el.user_id && <button type="submit" className="user-btn">{el.User.nickName}</button> }
+                { user.id === el.user_id && <button type="submit" className="me-btn">{el.User.nickName}</button> }
               </div>
             );
           })}

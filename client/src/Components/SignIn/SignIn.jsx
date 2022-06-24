@@ -25,7 +25,6 @@ export default function SignIn() {
     input: {
       borderRadius: 0,
       width: '180px',
-      maxLength: '12',
     },
   };
 

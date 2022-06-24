@@ -58,17 +58,21 @@ function App() {
                   </AuthRouter>
   )}
               />
-              <Route path="/rankings" element={<Rankings />}>
-                <Route path="/rankings/solo" element={<SoloRankings />} />
-                <Route path="/rankings/duo" element={<DuoRankings />} />
-              </Route>
-              <Route path="/queue" element={<Queue />} />
-              <Route path="/queue/2v2" element={<Queue2v2 />} />
-              <Route path="/tournaments" element={<Tournaments />} />
-              <Route path="/tournaments/:id" element={<Tournament />} />
-              <Route path="/tournaments/:id/registration" element={<NewTournament />} />
-              <Route path="/admin" element={<Admin />} />
-              <Route path="/admin/ban" element={<AdminBan />} />
+              {user.id && (
+              <>
+                <Route path="/rankings" element={<Rankings />}>
+                  <Route path="/rankings/solo" element={<SoloRankings />} />
+                  <Route path="/rankings/duo" element={<DuoRankings />} />
+                </Route>
+                <Route path="/queue" element={<Queue />} />
+                <Route path="/queue/2v2" element={<Queue2v2 />} />
+                <Route path="/tournaments" element={<Tournaments />} />
+                <Route path="/tournaments/:id" element={<Tournament />} />
+                <Route path="/tournaments/:id/registration" element={<NewTournament />} />
+                <Route path="/admin" element={<Admin />} />
+                <Route path="/admin/ban" element={<AdminBan />} />
+              </>
+              ) }
             </Routes>
           )}
         {/* </Container> */}
