@@ -2,7 +2,6 @@
 /* eslint-disable max-len */
 const express = require('express');
 const createError = require('http-errors');
-const logger = require('morgan');
 const path = require('path');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
@@ -54,7 +53,6 @@ const { PORT } = process.env;
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(cors({ credentials: true, origin: true }));
-app.use(logger('dev'));
 // app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
