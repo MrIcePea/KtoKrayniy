@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     date: DataTypes.STRING,
     mode: DataTypes.STRING,
+    reg: DataTypes.BOOLEAN,
     first_round: DataTypes.STRING,
   }, {
     sequelize,

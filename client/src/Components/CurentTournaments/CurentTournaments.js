@@ -16,8 +16,8 @@ function CurentTournaments() {
 
   return (
     <>
-      { tournaments.map((el) => (
-        <div className="tournament-btn-wrapper">
+      { tournaments.map((el) => (el.reg === true) && (
+        <div key={el.id} className="tournament-btn-wrapper">
           <Link to={`/tournaments/registration/${el.id}`}>
             <button type="submit" className="registration-btn">
               Регистрация на турнир
@@ -27,8 +27,8 @@ function CurentTournaments() {
           </Link>
         </div>
       ))}
-      {tournaments.map((el) => (
-        <div className="tournament-btn-wrapper">
+      {tournaments.map((el) => (el.reg === false) && (
+        <div key={el.id} className="tournament-btn-wrapper">
           <div className="tournament-wrapper" key={el.id}><Link className="tournament-item-link" to={`/tournaments/${el.id}`}><div className="tournament-item">{el.name}</div></Link></div>
         </div>
       ))}

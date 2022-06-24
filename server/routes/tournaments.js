@@ -116,7 +116,7 @@ router.post('/addtournament', async (req, res) => {
   const { name, mode, date } = req.body;
   console.log('submitHandler = (e)--------------', name, mode, date);
   await Tournament.create({
-    name, mode, date, first_round: '-',
+    name, mode, date, first_round: '-', reg: true,
   });
   const respon = await Tournament.findAll();
   res.json(respon);

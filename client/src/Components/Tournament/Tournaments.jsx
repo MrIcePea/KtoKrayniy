@@ -9,7 +9,7 @@ import './Tournament.css';
 
 function Tournaments() {
   const dispatch = useDispatch();
-  const { tournaments, addTourn } = useSelector((state) => state);
+  const { tournaments, addTourn, user } = useSelector((state) => state);
   const [inputs, setInputs] = useState({});
   const ref = useRef();
   useEffect(() => {
@@ -31,6 +31,7 @@ function Tournaments() {
 
   return (
     <div className="addtournament-wrapper">
+      {(user.role === 'admin') && (
       <form onSubmit={submitHandler}>
         <div className="tournament-name-wrapper">
           <label htmlFor="tournament-name" className="form-label">Название турнира</label>
@@ -66,6 +67,7 @@ function Tournaments() {
           <button type="submit" className="create-tournament-btn">Создать</button>
         </div>
       </form>
+      )}
       <CurentTournaments />
     </div>
   );
