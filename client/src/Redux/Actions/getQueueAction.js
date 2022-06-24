@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {
-  ADD_TO_QUEUE, GET_QUEUE, EXIT_FROM_QUEUE, MOVE_DOWN_QUEUE, WIN, CHANGE_MODE, GET_MODE, CHANGE_QUEUE,
+  ADD_TO_QUEUE, GET_QUEUE, EXIT_FROM_QUEUE, MOVE_DOWN_QUEUE, WIN, CHANGE_MODE, GET_MODE, CHANGE_QUEUE, DUO_JOIN_PAIR_QUEUE,
 } from '../Types/types';
 
 export const Queue = (value) => ({
@@ -78,3 +78,12 @@ export const changeMode = (value) => {
     payload: value,
   };
 };
+
+export const duoJoinPairQueue = (value) => {
+  console.log('------', value);
+  return {
+    type: DUO_JOIN_PAIR_QUEUE,
+    payload: value,
+  };
+};
+

@@ -4,10 +4,10 @@ import {
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  addToQueue, changeMode, changeQueue, deleteFromQueue, moveDownQueue, Queue, win,
+  addToQueue, changeMode, changeQueue, deleteFromQueue, duoJoinPairQueue, Mode, moveDownQueue, Queue, win,
 } from '../../Redux/Actions/getQueueAction';
 import {
-  ADD_TO_QUEUE, CHANGE_MODE, EXIT_FROM_QUEUE, MOVE_DOWN_QUEUE, START, WIN,
+  ADD_TO_QUEUE, CHANGE_MODE, DUO_ADD_TO_QUEUE, DUO_EXIT_FROM_QUEUE, DUO_JOIN_PAIR_QUEUE, EXIT_FROM_QUEUE, MOVE_DOWN_QUEUE, START, WIN,
 } from '../../Redux/Types/types';
 
 
@@ -44,13 +44,23 @@ export default function TodoContextProvider({ children }) {
     const { queue, mode } = params;
     switch (type) {
       case START:
+        dispatch(Mode(mode));
         dispatch(Queue(queue));
         break;
       case ADD_TO_QUEUE:
         dispatch(addToQueue(queue));
         break;
+      case DUO_ADD_TO_QUEUE:
+        dispatch(addToQueue(queue));
+        break;
       case EXIT_FROM_QUEUE:
         dispatch(deleteFromQueue(queue));
+        break;
+      case DUO_EXIT_FROM_QUEUE:
+        dispatch(deleteFromQueue(queue));
+        break;
+      case DUO_JOIN_PAIR_QUEUE:
+        dispatch(duoJoinPairQueue(queue));
         break;
       case MOVE_DOWN_QUEUE:
         console.log('queue in case', queue);

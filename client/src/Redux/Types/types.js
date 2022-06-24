@@ -14,3 +14,6 @@ export const CHANGE_MODE = 'CHANGE_MODE';
 export const GET_MODE = 'GET_MODE';
 export const GET_ALL_USERS = 'GET_ALL_USERS';
 export const CHANGE_QUEUE = 'CHANGE_QUEUE';
+export const DUO_ADD_TO_QUEUE = 'DUO_ADD_TO_QUEUE';
+export const DUO_EXIT_FROM_QUEUE = 'DUO_EXIT_FROM_QUEUE';
+export const DUO_JOIN_PAIR_QUEUE = 'DUO_JOIN_PAIR_QUEUE';
