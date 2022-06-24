@@ -24,7 +24,6 @@ export default function SignUp() {
     input: {
       borderRadius: 0,
       width: '180px',
-      maxLength: '12',
     },
   };
 
@@ -47,7 +46,7 @@ export default function SignUp() {
           <Input
             name="nickName"
             type="text"
-            maxlength="12"
+            maxLength="12"
             placeholder="Nick name"
             onChange={inputHandler}
             value={inputs.nickName || ''}

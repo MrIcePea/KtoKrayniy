@@ -54,8 +54,16 @@ function Queue2v2() {
     return (
       <>
         <div className="winner-btn-wrapper">
-          <button type="submit" className="winner-btn" onClick={() => duoWinHandler(queue[0].pair_id, queue[1].pair_id)}>Победил</button>
-          <button type="submit" className="winner-btn" onClick={() => duoWinHandler(queue[1].pair_id, queue[0].pair_id)}>Победил</button>
+          { queue[0] && queue[0].Pair.user1_id !== null && queue[0].Pair.user2_id !== null && queue[1] && queue[1].Pair.user1_id !== null && queue[1].Pair.user2_id !== null ? (
+            <button type="submit" className="winner-btn" onClick={() => duoWinHandler(queue[0].pair_id, queue[1].pair_id)}>Победил</button>
+          ) : (
+            <button type="submit" className="dis-winner-btn" disabled>Победил</button>
+          )}
+          { queue[0] && queue[0].Pair.user1_id !== null && queue[0].Pair.user2_id !== null && queue[1] && queue[1].Pair.user1_id !== null && queue[1].Pair.user2_id !== null ? (
+            <button type="submit" className="winner-btn" onClick={() => duoWinHandler(queue[1].pair_id, queue[0].pair_id)}>Победил</button>
+          ) : (
+            <button type="submit" className="dis-winner-btn" disabled>Победил</button>
+          )}
         </div>
         <div className="kick-btn-wrapper">
           { queue[0] && queue[0].Pair.user1_id !== null && queue[0].Pair.user2_id !== null ? (
