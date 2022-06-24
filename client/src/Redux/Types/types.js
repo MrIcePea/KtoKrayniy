@@ -14,3 +14,4 @@ export const CHANGE_MODE = 'CHANGE_MODE';
 export const GET_MODE = 'GET_MODE';
 export const GET_ALL_USERS = 'GET_ALL_USERS';
 export const CHANGE_QUEUE = 'CHANGE_QUEUE';
+export const APPROVE_USERS = 'APPROVE_USERS';
