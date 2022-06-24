@@ -1,11 +1,12 @@
-/* import { APPROVE_USERS } from '../Types/types';
+import { APPROVE_USERS } from '../Types/types';
 
 const getAllUsersReducer = (state = [], action) => {
   const { type, payload } = action;
+  console.log('payload --------', payload);
   switch (type) {
     case APPROVE_USERS:
-
-      return [...state, payload];
+      console.log('payload --------', payload);
+      return payload;
 
     default:
       return state;
@@ -13,4 +14,4 @@ const getAllUsersReducer = (state = [], action) => {
 };
 
 export default getAllUsersReducer;
- */
+

@@ -58,7 +58,7 @@ function App() {
                   </AuthRouter>
   )}
               />
-              {user.id && (
+              { (user.id && user.active) && (
               <>
                 <Route path="/rankings" element={<Rankings />}>
                   <Route path="/rankings/solo" element={<SoloRankings />} />

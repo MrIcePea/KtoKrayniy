@@ -22,9 +22,16 @@ router.route('/signin')
     if (nickName && pass) {
       const user = await User.findOne({ where: { nickName } });
       if (user && await bcrypt.compare(pass, user.pass)) {
-        req.session.user = { name: user.nickName, id: user.id, role: user.role };
+        req.session.user = {
+          name: user.nickName, id: user.id, role: user.role,
+        };
+        console.log('req.session.user --------->', req.session.user);
+        const currUser = await User.findByPk(req.session.user.id);
+        console.log('currUser --------->', currUser);
         console.log(`----->> Отправляем через res.json - session.user - - nickName - ${user.nickName}, user.id - ${user.id}, user.role - ${user.role}`);
-        return res.json({ name: user.nickName, id: user.id, role: user.role });
+        return res.json({
+          name: currUser.nickName, id: currUser.id, role: currUser.role, active: currUser.active, ban: currUser.ban,
+        });
       }
       return res.sendStatus(402);
     }
@@ -45,7 +52,7 @@ router.route('/signup')
       const user = await User.create({
         ...req.body,
         role: 'user',
-        active: true,
+        active: false,
         ban: false,
         solorank: 150,
         duorank: 150,
@@ -55,18 +62,30 @@ router.route('/signup')
         duolost: 0,
         pass: await bcrypt.hash(pass, 10),
       });
-      req.session.user = { name: user.nickName, id: user.id, role: user.role };
+      req.session.user = {
+        name: user.nickName, id: user.id, role: user.role,
+      };
+      console.log('req.session.user --------->', req.session.user);
+      const currUser = await User.findByPk(req.session.user.id);
+      console.log('currUser --------->', currUser);
       console.log(`----->> Отправляем через res.json зарегестрированного юзера с - session.user - - nickName - ${user.nickName}, user.id - ${user.id}, user.role - ${user.role}`);
-      return res.json({ name: user.nickName, id: user.id, role: user.role });
+      return res.json({
+        name: currUser.nickName, id: currUser.id, role: currUser.role, active: currUser.active, ban: currUser.ban,
+      });
     }
     return res.sendStatus(401);
   });
 
 router.route('/check')
-  .post((req, res) => {
+  .post(async (req, res) => {
     if (req.session.user) {
-      console.log(`----->> Проверка наличия сесси /check/check/. Отправляем ${req.session.user}`);
-      return res.json(req.session.user);
+      console.log('req.session.user --------->', req.session.user);
+      const currUser = await User.findByPk(req.session.user.id);
+      console.log('currUser --------->', currUser);
+      console.log(`----->> Проверка наличия сесси /check/check/. Отправляем ${currUser}`);
+      return res.json({
+        name: currUser.nickName, id: currUser.id, role: currUser.role, active: currUser.active, ban: currUser.ban,
+      });
     }
     return res.sendStatus(401);
   });

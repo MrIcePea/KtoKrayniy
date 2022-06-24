@@ -53,6 +53,7 @@ function Queue2v2() {
 
     return (
       <>
+        { user.role === 'hallManager' && (
         <div className="winner-btn-wrapper">
           { queue[0] && queue[0].Pair.user1_id !== null && queue[0].Pair.user2_id !== null && queue[1] && queue[1].Pair.user1_id !== null && queue[1].Pair.user2_id !== null ? (
             <button type="submit" className="winner-btn" onClick={() => duoWinHandler(queue[0].pair_id, queue[1].pair_id)}>Победил</button>
@@ -65,6 +66,8 @@ function Queue2v2() {
             <button type="submit" className="dis-winner-btn" disabled>Победил</button>
           )}
         </div>
+        ) }
+        { user.role === 'hallManager' && (
         <div className="kick-btn-wrapper">
           { queue[0] && queue[0].Pair.user1_id !== null && queue[0].Pair.user2_id !== null ? (
             <button type="submit" className="kick-btn" onClick={() => duoExitQueueHandler(queue[0].Pair.user1_id, 'kick0')}>Не явился</button>
@@ -77,6 +80,7 @@ function Queue2v2() {
             <button type="submit" className="dis-kick-btn" disabled>Не явился</button>
           )}
         </div>
+        )}
         <div className="queue-wrapper">
           <img className="tennis-table-img" src="/images/table-tennis.png" alt="" />
           <div className="gamers-wrapper">
@@ -133,6 +137,7 @@ function Queue2v2() {
               </div>
             </div>
           </div>
+          { user.role === 'hallManager' && (
           <div className="kick-btn-wrapper">
             { queue[0] && queue[0].Pair.user1_id !== null && queue[0].Pair.user2_id !== null ? (
               <button type="submit" className="kick-btn" onClick={() => duoExitQueueHandler(queue[0].Pair.user2_id, 'kick0')}>Не явился</button>
@@ -145,6 +150,7 @@ function Queue2v2() {
               <button type="submit" className="dis-kick-btn" disabled>Не явился</button>
             )}
           </div>
+          )}
           {queue && queue.map((el, index) => {
             if ((queue[index].Pair.user1_id !== null && queue[index].Pair.user2_id !== null) && (index === 0 || index === 1)) {
               return (
@@ -161,7 +167,8 @@ function Queue2v2() {
                 )}
                 {el.Pair.user1_id === null && (
                 <div className="left-user">
-                  <button type="submit" className="empty-btn" onClick={() => joinPairQueueHandler(user.id, el.pair_id)}>Свободно</button>
+                  { user.role !== 'hallManager' && <button type="submit" className="empty-btn" onClick={() => joinPairQueueHandler(user.id, el.pair_id)}>Свободно</button> }
+                  { user.role === 'hallManager' && <button type="submit" className="empty-btn" disabled>Свободно</button> }
                 </div>
                 )}
                 <div><span>—</span></div>
@@ -173,19 +180,20 @@ function Queue2v2() {
                 )}
                 {el.Pair.user2_id === null && (
                 <div className="right-user">
-                  <button type="submit" className="empty-btn" onClick={() => joinPairQueueHandler(user.id, el.pair_id)}>Свободно</button>
+                  { user.role !== 'hallManager' && <button type="submit" className="empty-btn" onClick={() => joinPairQueueHandler(user.id, el.pair_id)}>Свободно</button>}
+                  { user.role === 'hallManager' && <button type="submit" className="empty-btn" disabled>Свободно</button> }
                 </div>
                 )}
               </div>
             );
           })}
-          {queue.find((el) => (user.id === el.Pair.user1_id || user.id === el.Pair.user2_id)) && (
+          {user.role !== 'hallManager' && queue.find((el) => (user.id === el.Pair.user1_id || user.id === el.Pair.user2_id)) && (
           <div className="stay-to-queue-wrapper">
             {queue.indexOf(queue.find((el) => (user.id === el.Pair.user1_id || user.id === el.Pair.user2_id))) !== queue.length - 1 && <button type="submit" className="stay-to-queue-btn" onClick={() => duoMoveDownHandler(user.id)}>Пропустить очередь</button>}
             <button type="submit" className="stay-to-queue-btn" onClick={() => duoExitQueueHandler(user.id, 'exit')}>Выйти из очереди</button>
           </div>
           )}
-          {!queue.find((el) => (user.id === el.Pair.user1_id || user.id === el.Pair.user2_id)) && (<button type="submit" className="stay-to-queue-btn" onClick={() => duoAddToQueueHandler(user.id)}>Встать в очередь</button>)}
+          {user.role !== 'hallManager' && !queue.find((el) => (user.id === el.Pair.user1_id || user.id === el.Pair.user2_id)) && (<button type="submit" className="stay-to-queue-btn" onClick={() => duoAddToQueueHandler(user.id)}>Встать в очередь</button>)}
         </div>
       </>
     );

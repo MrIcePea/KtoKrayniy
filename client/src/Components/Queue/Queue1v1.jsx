@@ -32,10 +32,12 @@ function Queue1v1() {
     };
     return (
       <>
+        { user.role === 'hallManager' && (
         <div className="winner-btn-wrapper">
           <button type="submit" className="winner-btn" onClick={() => winHandler(queue[0].user_id, queue[1].user_id)}>Победил</button>
           <button type="submit" className="winner-btn" onClick={() => winHandler(queue[1].user_id, queue[0].user_id)}>Победил</button>
         </div>
+        )}
         <div className="queue-wrapper">
           <img className="tennis-table-img" src="/images/table-tennis.png" alt="" />
           <div className="gamers-wrapper">
@@ -70,10 +72,12 @@ function Queue1v1() {
               </div>
             </div>
           </div>
+          { user.role === 'hallManager' && (
           <div className="kick-btn-wrapper">
             <button type="submit" className="kick-btn" onClick={() => exitQueueHandler(queue[0].user_id)}>Не явился</button>
             <button type="submit" className="kick-btn" onClick={() => exitQueueHandler(queue[1].user_id)}>Не явился</button>
           </div>
+          )}
           {queue && queue.map((el, index) => {
             if (index === 0 || index === 1) {
               return (
@@ -87,13 +91,13 @@ function Queue1v1() {
               </div>
             );
           })}
-          {queue.find((el) => (user.id === el.User.id)) && (
+          {user.role !== 'hallManager' && queue.find((el) => (user.id === el.User.id)) && (
           <div className="stay-to-queue-wrapper">
             { queue.indexOf(queue.find((el) => (user.id === el.User.id))) !== queue.length - 1 && <button type="submit" className="stay-to-queue-btn" onClick={() => moveDownHandler(user.id)}>Пропустить очередь</button>}
             <button type="submit" className="stay-to-queue-btn" onClick={() => exitQueueHandler(user.id)}>Выйти из очереди</button>
           </div>
           )}
-          {!queue.find((el) => (user.id === el.User.id)) && (<button type="submit" className="stay-to-queue-btn" onClick={() => addToQueueHandler(user.id)}>Встать в очередь</button>)}
+          {user.role !== 'hallManager' && !queue.find((el) => (user.id === el.User.id)) && (<button type="submit" className="stay-to-queue-btn" onClick={() => addToQueueHandler(user.id)}>Встать в очередь</button>)}
         </div>
       </>
     );

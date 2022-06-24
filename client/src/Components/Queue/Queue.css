@@ -20,6 +20,33 @@ ul {
   background-color: #31353b;
 }
 
+.game-mode {
+  width: 80px;
+  height: 30px;
+  font-size: 12px;
+  background-color: #171b20;
+  color: white;
+  border: 0;
+}
+
+.curr-game-mode {
+  width: 80px;
+  height: 30px;
+  font-size: 12px;
+  background-color: #d34547;
+  color: white;
+  border: 0;
+}
+
+.dis-change-game-type-btn {
+  width: 80px;
+  height: 30px;
+  font-size: 12px;
+  background-color: #8e8686;
+  color: white;
+  border: 0;
+}
+
 .queue-wrapper {
   display: flex;
   flex-direction: column;
